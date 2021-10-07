@@ -52,3 +52,11 @@ button{
     background: none;
     padding: 0;
 }
+input{
+    background: none;
+    border: none;
+
+    &:focus-visible{
+        outline: none;
+    }
+}

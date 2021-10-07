@@ -1,10 +1,17 @@
 .plain-button{
-    padding: .85rem 1.75rem;
-    border-radius: 8px;
+    height: 45px;
+    padding: 0 1.75rem;
+    border-radius: .4rem;
+    transition: .15s;
 
     &--light{
-        background-color: $color-white;
+        background-color: $color-pure-white;
         color: $color-black;
+
+        &:hover{
+            background-color: $color-light_gray;
+            color: $color-white;
+        }
     }
 
     &--dark{

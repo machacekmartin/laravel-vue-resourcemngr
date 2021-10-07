@@ -1,0 +1,21 @@
+.search{
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+
+    &__input{
+        padding: 1rem 1.5rem 1rem 4.25rem;
+        width: 100%;
+        border-radius: .4rem;
+        background: $color-ultra_light_gray;
+        border: solid $color_light_gray .15rem;
+        font-style: italic;
+        font-weight: bold;
+    }
+    &__icon{
+        position: absolute;
+        left: 1.5rem;
+        fill: $color_light_gray;
+    }
+}

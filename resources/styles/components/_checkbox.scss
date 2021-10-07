@@ -1,0 +1,50 @@
+.checkbox{
+    $self: &;
+    display: inline-flex;
+    padding: 0 1rem;
+    align-items: center;
+    border-radius: .4rem;
+    cursor: pointer;
+    overflow: hidden;
+    transition: .15s;
+    border: solid .1rem $color_light_gray;
+
+    &--active{
+        border-color: rgba(0,0,0,0);
+        
+        #{ $self }__text{
+            color: $color-white;
+        }
+
+        #{ $self }__icon{
+            opacity: 1;
+        }
+
+        &#{ $self }--pdf{
+            @include bgAndHover($color-orange);
+        }
+        &#{ $self }--link{
+            @include bgAndHover($color-pink);
+        }
+        &#{ $self }--code{
+            @include bgAndHover($color-blue);
+        }
+    }
+
+    &__text{
+        color: $color_light_gray;
+        font-weight: bold;
+        transition: .15s;
+    }
+
+    &__icon{
+        padding: .65rem 0rem .65rem 1rem;
+        fill: $color-white;
+        opacity: 0;
+        transition: .15s;
+    }
+
+    &__input{
+        display: none;
+    }
+}

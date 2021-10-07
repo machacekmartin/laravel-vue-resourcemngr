@@ -1,8 +1,8 @@
 <template>
-    <button class="icon-button" :class="dark ? 'icon-button--dark' : 'icon-button--light'">
-        <span class="icon-button__text">{{ text }}</span>
+    <button class="icon-button" :class="'icon-button--'+ colorMode" @click="emitClick" aria-label="button">
+        <span v-if="text" class="icon-button__text">{{ text }}</span>
         <div class="icon-button__icon">
-            <icon name="edit" :width="20" :height="20"></icon>
+            <icon :icon="icon" :width="iconSize" :height="iconSize"></icon>
         </div>
     </button>
 </template>
@@ -11,17 +11,26 @@
 export default {
     name: 'IconButton',
     props: {
-        text: {
-            type: String,
+        iconSize: {
+            type: Number,
             required: true
         },
-        dark: {
-            type: Boolean,
-            default: false
+        text: {
+            type: String,
+            required: false
+        },
+        colorMode: {
+            type: String,
+            default: 'dark'
         },
         icon: {
             type: String,
             required: true
+        }
+    },
+    methods: {
+        emitClick(){
+            this.$emit('click')
         }
     }
 }

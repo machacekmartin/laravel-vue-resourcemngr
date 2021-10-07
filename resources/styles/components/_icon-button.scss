@@ -1,39 +1,93 @@
 .icon-button{
+    $self: &; 
     display: flex;
-    align-items: center;
-    border-radius: .5rem;
+    align-items: stretch;
+    border-radius: .4rem;
     overflow: hidden;
-
-    &--light{
-        background-color: $color-white;
-        color: $color-black;
-    }
-
-    &--dark{
-        color: $color-white;
-        background-color: $color-black;
-
-        &:hover{
-            background-color: $color-dark_gray
-        }
-    }
 
     &__text{
         display: flex;
-        align-self: stretch;
         align-items: center;
         padding: 0 1.25rem;
-        background: #242836;
-        color: $color-white;
         font-weight: 700;
+        color: $color-white;
     }
 
     &__icon{
         display: flex;
-        background: #1C212E;
+        align-items: center;
+        justify-content: center;
+        width: 48px;
+        height: 45px;
         fill: $color-white;
-        
-        padding: .75rem .85rem;
+        transition: .15s;
     }
 
+    &--white{
+        #{ $self }__text{
+            color: $color-black;
+        }
+        #{ $self }__icon{
+            background-color: $color-white;
+            fill: $color-black;
+        }
+        &:hover{
+            #{ $self }__icon{
+                background-color: $color-light_gray;
+                fill: $color-white
+            }
+        }
+    }
+
+    &--ruby{
+        #{ $self }__text{
+            background-color: rgba($color-ruby, .9);
+        }
+        #{ $self }__icon{
+            background-color: $color-ruby;
+        }
+        &:hover{
+            #{ $self }__icon{
+                background-color: darken($color-ruby, 5%);
+            }
+        }
+    }
+
+    &--blue{
+        #{ $self }__text{
+            color: $color-blue;
+            background-color: rgba($color-white, .89);
+        }
+        #{ $self }__icon{
+            background-color: $color-blue;
+        }
+        &:hover{
+            #{ $self }__icon{
+                background-color: darken($color-blue, 5%);
+            }
+        }
+    }
+
+    &--red{
+        #{ $self }__text{
+            background-color: rgba($color-red, .85);
+        }
+        #{ $self }__icon{
+            background-color: $color-red;
+        }
+    }
+
+    &--dark{
+        #{ $self }__text{
+            background-color: rgba($color-dark_blue, .95);
+        }
+        #{ $self }__icon{
+            background-color: $color-dark_blue;
+        }
+        &:hover{
+            #{ $self }__icon{
+                background-color: darken($color-dark_blue, 5%);
+            }
+        }
+    }
 }
