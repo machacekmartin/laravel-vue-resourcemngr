@@ -1,0 +1,18 @@
+.plain-button{
+    padding: .85rem 1.75rem;
+    border-radius: 8px;
+
+    &--light{
+        background-color: $color-white;
+        color: $color-black;
+    }
+
+    &--dark{
+        color: $color-white;
+        background-color: $color-black;
+
+        &:hover{
+            background-color: $color-dark_gray
+        }
+    }
+}

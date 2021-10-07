@@ -12,8 +12,12 @@
     "devDependencies": {
         "browser-sync": "^2.27.5",
         "browser-sync-webpack-plugin": "^2.3.0",
+        "eslint": "^7.32.0",
+        "eslint-plugin-vue": "^7.19.1",
         "laravel-mix": "^6.0.31",
-        "postcss": "^8.1.14",
+        "resolve-url-loader": "^4.0.0",
+        "sass": "^1.42.1",
+        "sass-loader": "^12.1.0",
         "vue": "^2.6.14",
         "vue-loader": "^15.9.8",
         "vue-router": "^3.5.2",

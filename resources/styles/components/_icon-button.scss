@@ -1,0 +1,39 @@
+.icon-button{
+    display: flex;
+    align-items: center;
+    border-radius: .5rem;
+    overflow: hidden;
+
+    &--light{
+        background-color: $color-white;
+        color: $color-black;
+    }
+
+    &--dark{
+        color: $color-white;
+        background-color: $color-black;
+
+        &:hover{
+            background-color: $color-dark_gray
+        }
+    }
+
+    &__text{
+        display: flex;
+        align-self: stretch;
+        align-items: center;
+        padding: 0 1.25rem;
+        background: #242836;
+        color: $color-white;
+        font-weight: 700;
+    }
+
+    &__icon{
+        display: flex;
+        background: #1C212E;
+        fill: $color-white;
+        
+        padding: .75rem .85rem;
+    }
+
+}

@@ -11,8 +11,8 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/vue/app.js', 'vue/app.js').vue()
-    .postCss('resources/styles/app.css', 'public/styles', [
-        //
-    ])
+mix .disableNotifications()
+    .copy('resources/icons/icon-set.svg', 'public/icons')
+    .js('resources/vue/app.js', 'vue/app.js').vue()
+    .sass('resources/styles/app.scss', 'public/styles/app.css')
     .browserSync('127.0.0.1:8000')
