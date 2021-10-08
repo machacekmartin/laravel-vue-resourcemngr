@@ -5,7 +5,7 @@
             <h4 class="resources-item__title">{{ data.title }}</h4>
             <div class="resources-item__buttons">
                 <template v-if="data.type == 'code'">
-                    <icon-button class="resources-item__button" text="Copy" icon="edit" :iconSize="16" colorMode="dark"></icon-button>
+                    <icon-button class="resources-item__button" text="Copy" icon="edit" :iconSize="16" colorMode="dark" @click="copyToClipboard(data.snippet)"></icon-button>
                     <icon-button class="resources-item__button" icon="plus" :iconSize="16" colorMode="white" @click="toggleShowSnippet()"></icon-button>
                 </template>
                 
@@ -14,7 +14,7 @@
                 </template>
 
                 <template v-if="data.type == 'pdf'">
-                    <icon-button class="resources-item__button" text="Download" icon="cross" :iconSize="13" colorMode="dark"></icon-button>
+                    <icon-button class="resources-item__button" text="Download" icon="cross" :iconSize="13" colorMode="dark" @click="downloadFile(data.file)"></icon-button>
                     <plain-button class="resources-item__button" text="Preview" @click="toggleShowPreview()"></plain-button>
                 </template>
             </div>
@@ -55,6 +55,23 @@ export default {
         }
     },
     methods: {
+        async downloadFile(path){
+            const name = path.split('/').pop()
+            const response = await this.$http.get(path)
+            const url = window.URL.createObjectURL(new Blob([response.data]))
+            let link = document.createElement('a')
+
+            link.href = url;
+            link.setAttribute('download', name);
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+
+        },
+        copyToClipboard(text){
+            navigator.clipboard.writeText(text)
+
+        },
         openLink(link, newTab){
             if (newTab){
                 window.open(link)

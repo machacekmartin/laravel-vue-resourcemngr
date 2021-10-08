@@ -24,7 +24,7 @@ export default {
                 {
                     type: 'pdf',
                     title: 'My first oficial PDF document',
-                    file: 'http://www.africau.edu/images/default/sample.pdf#toolbar=0&navpanes=0&scrollbar=0'
+                    file: '/storage/sample.pdf'
                 },
                 {
                     type: 'code',
@@ -59,7 +59,7 @@ export default {
                 {
                     type: 'pdf',
                     title: 'hey2',
-                    file: 'http://www.africau.edu/images/default/sample.pdf#toolbar=0&navpanes=0&scrollbar=0'
+                    file: 'https://www.africau.edu/images/default/sample.pdf'
                 },
                 {
                     type: 'link',
@@ -76,12 +76,12 @@ export default {
                 {
                     type: 'pdf',
                     title: 'hey2',
-                    file: 'http://www.africau.edu/images/default/sample.pdf#toolbar=0&navpanes=0&scrollbar=0'
+                    file: 'https://www.africau.edu/images/default/sample.pdf'
                 },
                 {
                     type: 'pdf',
                     title: 'hey2',
-                    file: 'http://www.africau.edu/images/default/sample.pdf#toolbar=0&navpanes=0&scrollbar=0'
+                    file: 'https://www.africau.edu/images/default/sample.pdf'
                 },
                 {
                     type: 'link',

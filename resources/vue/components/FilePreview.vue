@@ -1,6 +1,6 @@
 <template>
     <div class="file-preview">
-        <embed class="file-preview__item" :src="file" width="100%" height="100%">
+        <embed class="file-preview__item" :src="file + '#toolbar=0&navpanes=0&scrollbar=0'" width="100%" height="100%">
     </div>
 </template>
 
