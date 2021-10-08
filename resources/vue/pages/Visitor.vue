@@ -1,93 +1,114 @@
 <template>
     <div class="page">  
-        <div class="resources">
-            <div class="resources__header">
-                <h1 class="resources__title">Resources</h1>
-                    <checkbox class="resources__filter" type="code" @toggled="toggleFilter('code')"></checkbox>
-                    <checkbox class="resources__filter" type="pdf" @toggled="toggleFilter('pdf')"></checkbox>
-                    <checkbox class="resources__filter" type="link" @toggled="toggleFilter('link')"></checkbox>
-            </div>
-            <search style="margin-bottom: 2rem" @keypress="setSearch"></search>
-            <resource-item v-for="resource in foundResources" :key="resource.text" :data="resource"></resource-item>
-        </div>
+        <resources :resources="resourcesArray"></resources>
     </div>
 </template>
 
 <script>
-import ResourceItem from '../components/ResourceItem.vue'
-import Search from '../components/Search.vue'
-import Checkbox from '../components/Checkbox.vue'
+import Resources from '../components/Resources.vue'
 
 export default {
     components: {
-        ResourceItem,
-        Search,
-        Checkbox
+        Resources
     },
     data(){
         return {
             search: '',
-            resources: [
+            resourcesArray: [
+                {
+                    type: 'link',
+                    title: 'ASD NKASD JNKLASD JNKL ASDKJNASD JNKASD jnklasd ',
+                    link: 'https://www.gogle.com/docs/documents/awdjnawd',
+                    newTab: true
+                },
                 {
                     type: 'pdf',
-                    text: 'My first oficial PDF document'
+                    title: 'My first oficial PDF document',
+                    file: 'http://www.africau.edu/images/default/sample.pdf#toolbar=0&navpanes=0&scrollbar=0'
                 },
                 {
                     type: 'code',
-                    text: 'hey1'
+                    title: 'hey1',
+                    description: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.`,
+                    snippet: 
+`<form action="http://maps.google.com/maps" method="get" target="_blank">
+   <label for="saddr">Enter your location</label>
+   <input type="text" name="saddr" />
+   <input type="hidden" name="daddr" value="350 5th Ave New York, NY 10018 (Empire State Building ) 350 5th Ave New York, NY 10018 (Empire State Building)" />
+   <input type="submit" value="Get directions" />
+</form>
+<form action="http://maps.google.com/maps" method="get" target="_blank">
+   <label for="saddr">Enter your location</label>
+   <input type="text" name="saddr" />
+   <input type="hidden" name="daddr" value="350 5th Ave New York, NY 10018 (Empire State Building)" />
+   <input type="submit" value="Get directions" />
+</form>
+<form action="http://maps.google.com/maps" method="get" target="_blank">
+   <label for="saddr">Enter your location</label>
+   <input type="text" name="saddr" />
+   <input type="hidden" name="daddr" value="350 5th Ave New York, NY 10018 (Empire State Building ) 350 5th Ave New York, NY 10018 (Empire State Building)" />
+   <input type="submit" value="Get directions" />
+</form>
+<form action="http://maps.google.com/maps" method="get" target="_blank">
+   <label for="saddr">Enter your location</label>
+   <input type="text" name="saddr" />
+   <input type="hidden" name="daddr" value="350 5th Ave New York, NY 10018 (Empire State Building)" />
+   <input type="submit" value="Get directions" />
+</form>`
                 },
                 {
                     type: 'pdf',
-                    text: 'hey2'
+                    title: 'hey2',
+                    file: 'http://www.africau.edu/images/default/sample.pdf#toolbar=0&navpanes=0&scrollbar=0'
                 },
                 {
                     type: 'link',
-                    text: 'hey3',
-                    link: 'https://www.gogle.com/docs/documents/'
+                    title: 'ASD NKASD JNKLASD JNKL ASDKJNASD JNKASD jnklasd ',
+                    link: 'https://www.gogle.com/docs',
+                    newTab: false
                 },
                 {
                     type: 'link',
-                    text: 'ASD NKASD JNKLASD JNKL ASDKJNASD JNKASD jnklasd ',
-                    link: 'https://www.gogle.com/docs/documents/awdjnawd'
+                    title: 'hey3',
+                    link: 'https://www.gogle.com/docs/documents/',
+                    newTab: true
                 },
-            ],
-            
-            activeFilters: [],
+                {
+                    type: 'pdf',
+                    title: 'hey2',
+                    file: 'http://www.africau.edu/images/default/sample.pdf#toolbar=0&navpanes=0&scrollbar=0'
+                },
+                {
+                    type: 'pdf',
+                    title: 'hey2',
+                    file: 'http://www.africau.edu/images/default/sample.pdf#toolbar=0&navpanes=0&scrollbar=0'
+                },
+                {
+                    type: 'link',
+                    title: 'ASD NKASD JNKLASD JNKL ASDKJNASD JNKASD jnklasd ',
+                    link: 'https://www.gogle.com',
+                    newTab: true
+                },
+                {
+                    type: 'code',
+                    title: 'hey1',
+                    description: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.`,
+                    snippet: 
+`<form action="http://maps.google.com/maps" method="get" target="_blank">
+   <label for="saddr">Enter your location</label>
+   <input type="text" name="saddr" />
+   <input type="hidden" name="daddr" value="350 5th Ave New York, NY 10018 (Empire State Building ) 350 5th Ave New York, NY 10018 (Empire State Building)" />
+   <input type="submit" value="Get directions" />
+</form>
+<form action="http://maps.google.com/maps" method="get" target="_blank">
+   <label for="saddr">Enter your location</label>
+   <input type="text" name="saddr" />
+   <input type="hidden" name="daddr" value="350 5th Ave New York, NY 10018 (Empire State Building)" />
+   <input type="submit" value="Get directions" />
+</form>`
+                },
+            ]
         }
     },
-    computed: {
-        foundResources(){
-            if (this.search !== ''){
-                return this.filteredResources.filter(resource => {
-                    return resource.text.includes(this.search) || 
-                    resource.type.includes(this.search) ||
-                    resource.link?.includes(this.search)
-                })
-            }
-            return this.filteredResources;
-        },
-        filteredResources(){
-            return this.resources.filter(resource => {
-                return this.activeFilters.includes(resource.type)
-            })
-        }
-    },
-    methods: {
-        toggleFilter(toggledFilter){
-            if (this.activeFilters.includes(toggledFilter)){
-                const index = this.activeFilters.indexOf(toggledFilter)
-                this.activeFilters.splice(index, 1)
-            }
-            else{
-                this.activeFilters.push(toggledFilter)
-            }
-        },
-        setSearch(search){
-            this.search = search
-        },
-    },
-    mounted(){
-        this.activeFilters = [... new Set(this.resources.map(res => res.type))]
-    }
 }
 </script>

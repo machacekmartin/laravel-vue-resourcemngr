@@ -1,8 +1,12 @@
 .plain-button{
-    height: 45px;
+    height: 35px;
     padding: 0 1.75rem;
     border-radius: .4rem;
     transition: .15s;
+
+    @media (min-width: 550px){
+        height: 45px;
+    }
 
     &--light{
         background-color: $color-pure-white;

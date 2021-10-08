@@ -1,13 +1,17 @@
 .checkbox{
     $self: &;
     display: inline-flex;
-    padding: 0 1rem;
+    padding: 0 .5rem;
     align-items: center;
     border-radius: .4rem;
     cursor: pointer;
     overflow: hidden;
     transition: .15s;
-    border: solid .1rem $color_light_gray;
+    border: solid .15rem $color_light_gray;
+
+    @media (min-width: 550px){
+        padding: 0 1rem;
+    }
 
     &--active{
         border-color: rgba(0,0,0,0);
@@ -38,10 +42,14 @@
     }
 
     &__icon{
-        padding: .65rem 0rem .65rem 1rem;
+        padding: .5rem 0rem .5rem .5rem;
         fill: $color-white;
         opacity: 0;
         transition: .15s;
+
+        @media (min-width: 550px){
+            padding: .65rem 0rem .65rem 1rem;
+        }
     }
 
     &__input{

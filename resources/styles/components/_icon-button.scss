@@ -4,27 +4,49 @@
     align-items: stretch;
     border-radius: .4rem;
     overflow: hidden;
+    height: 35px;
+
+    @media (min-width: 550px){
+        height: 45px;
+    }
+    
+    &__content{
+        color: $color-white; 
+        display: flex;
+        align-items: center;  
+    }
 
     &__text{
-        display: flex;
-        align-items: center;
-        padding: 0 1.25rem;
+        padding: 0 .75rem;
         font-weight: 700;
-        color: $color-white;
+        max-width: 300px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        display: none;
+
+        @media (min-width: 550px){
+            padding: 0 1.25rem;
+            display: inline;
+        }
     }
 
     &__icon{
         display: flex;
         align-items: center;
         justify-content: center;
-        width: 48px;
-        height: 45px;
+        width: 35px;
+        height: 100%;
         fill: $color-white;
         transition: .15s;
+
+        @media (min-width: 550px){
+            width: 48px;
+        }
     }
 
     &--white{
-        #{ $self }__text{
+        #{ $self }__content{
             color: $color-black;
         }
         #{ $self }__icon{
@@ -40,7 +62,7 @@
     }
 
     &--ruby{
-        #{ $self }__text{
+        #{ $self }__content{
             background-color: rgba($color-ruby, .9);
         }
         #{ $self }__icon{
@@ -54,7 +76,7 @@
     }
 
     &--blue{
-        #{ $self }__text{
+        #{ $self }__content{
             color: $color-blue;
             background-color: rgba($color-white, .89);
         }
@@ -69,7 +91,7 @@
     }
 
     &--red{
-        #{ $self }__text{
+        #{ $self }__content{
             background-color: rgba($color-red, .85);
         }
         #{ $self }__icon{
@@ -78,7 +100,7 @@
     }
 
     &--dark{
-        #{ $self }__text{
+        #{ $self }__content{
             background-color: rgba($color-dark_blue, .95);
         }
         #{ $self }__icon{

@@ -7,10 +7,16 @@
 @import 'variables/mixins';
 @import 'variables/colors';
 
+@import 'components/resources';
 @import 'components/plain-button';
 @import 'components/icon-button';
 @import 'components/icon';
 @import 'components/sticker';
-@import 'components/resource-item';
+@import 'components/resources-list';
+@import 'components/resources-item';
 @import 'components/search';
 @import 'components/checkbox';
+@import 'components/file-preview';
+@import 'components/code-snippet';
+
+@import 'components/vue-transitions'

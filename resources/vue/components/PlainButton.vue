@@ -1,5 +1,5 @@
 <template>
-    <button class="plain-button" :class="dark ? 'plain-button--dark' : 'plain-button--light'">
+    <button class="plain-button" :class="dark ? 'plain-button--dark' : 'plain-button--light'" @click="emitClick()">
         {{ uppercase ? text.toUpperCase() : text }}
     </button>
 </template>
@@ -19,6 +19,11 @@ export default {
         uppercase: {
             type: Boolean,
             default: false
+        }
+    },
+    methods: {
+        emitClick(){
+            this.$emit('click')
         }
     }
 }

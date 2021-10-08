@@ -1,0 +1,51 @@
+.resources-item{
+    width: 100%;
+    background: $color-ultra_light_gray;
+    margin-bottom: .5rem;
+    border-radius: .4rem;
+    padding: .5rem;
+    
+    @media (min-width: 550px){
+        margin-bottom: 1rem;
+        padding: .75rem 1rem;
+    }
+
+    &__header{
+        display: flex;
+        align-items: center;
+    }
+
+    &__title{
+        margin-left: .5rem;
+        color: $color-dark_gray;
+
+        @media (min-width: 550px){
+            margin-left: 1rem;
+        }
+    }
+
+    &__buttons{
+        display: flex;
+        margin-left: auto;
+    }
+
+    &__button{
+        &:not(:last-child){
+            margin-right: .5rem;
+
+            @media (min-width: 550px){
+                margin-right: 1rem;
+            }
+        }
+    }
+
+    &__addition{
+        margin-top: 1rem;
+    }
+
+    &__preview{
+        opacity: 1;
+        height: 500px;
+    }
+
+}

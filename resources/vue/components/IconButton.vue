@@ -1,6 +1,8 @@
 <template>
-    <button class="icon-button" :class="'icon-button--'+ colorMode" @click="emitClick" aria-label="button">
-        <span v-if="text" class="icon-button__text">{{ text }}</span>
+    <button class="icon-button" :class="'icon-button--'+ colorMode" @click="emitClick()" aria-label="button">
+        <div v-if="text" class="icon-button__content">
+            <span class="icon-button__text">{{ text }}</span>
+        </div>
         <div class="icon-button__icon">
             <icon :icon="icon" :width="iconSize" :height="iconSize"></icon>
         </div>
