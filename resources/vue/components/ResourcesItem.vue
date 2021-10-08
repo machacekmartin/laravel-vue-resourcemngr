@@ -9,17 +9,16 @@
                         <icon icon="checkmark" v-if="showClipped" :width="14" :height="14" class="resources-item__button-popup"></icon>
                     </transition>
                     <icon-button class="resources-item__button" text="Copy" icon="edit" :iconSize="16" colorMode="dark" @click="copyToClipboard(data.snippet)"></icon-button>
-                    
-                    <icon-button class="resources-item__button" icon="plus" :iconSize="16" colorMode="white" @click="toggleShowSnippet()"></icon-button>
+                    <icon-button class="resources-item__button" :icon="showSnippet ? 'cross' : 'plus'" :iconSize="16" colorMode="white" @click="toggleShowSnippet()"></icon-button>
                 </template>
                 
                 <template v-if="data.type == 'link'">
-                    <icon-button  class="resources-item__button" :text="data.link" :icon="data.newTab ? 'next': 'cross' " :iconSize="16" colorMode="blue" @click="openLink(data.link, data.newTab)"></icon-button>
+                    <icon-button class="resources-item__button" :text="data.link" :icon="data.newTab ? 'next': 'home' " :iconSize="16" colorMode="blue" @click="openLink(data.link, data.newTab)"></icon-button>
                 </template>
 
                 <template v-if="data.type == 'pdf'">
                     <icon-button class="resources-item__button" text="Download" icon="cross" :iconSize="13" colorMode="dark" @click="downloadFile(data.file)"></icon-button>
-                    <plain-button class="resources-item__button" text="Preview" @click="toggleShowPreview()"></plain-button>
+                    <icon-button class="resources-item__button" :icon="showPreview ? 'back' : 'next'" :iconSize="13" colorMode="white" @click="toggleShowPreview()"></icon-button>
                 </template>
             </div>
         </div>
