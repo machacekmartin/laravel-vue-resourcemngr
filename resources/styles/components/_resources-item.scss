@@ -25,11 +25,28 @@
     }
 
     &__buttons{
+        position: relative;
         display: flex;
         margin-left: auto;
     }
 
+    &__button-popup{
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 48px;
+        height: 100%;
+        left: -42px;
+        background: $color-light_gray;
+        fill: $color-white;
+        border-radius: .4rem  0 0 .4rem;
+        z-index: 0;
+    }
+
     &__button{
+        position: relative;
+        z-index: 1;
         &:not(:last-child){
             margin-right: .5rem;
 

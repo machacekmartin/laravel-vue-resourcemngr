@@ -101,14 +101,14 @@
 
     &--dark{
         #{ $self }__content{
-            background-color: rgba($color-dark_blue, .95);
+            background-color: $color-dark_blue 
         }
         #{ $self }__icon{
-            background-color: $color-dark_blue;
+            background-color: $color-very_dark_blue;
         }
         &:hover{
             #{ $self }__icon{
-                background-color: darken($color-dark_blue, 5%);
+                background-color: darken($color-very_dark_blue, 5%);
             }
         }
     }

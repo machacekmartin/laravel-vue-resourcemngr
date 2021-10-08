@@ -5,3 +5,10 @@
 .fade-enter, .fade-leave-to{
     opacity: 0;
 }
+
+.slide-enter-active, .slide-leave-active{
+    transition: .5s cubic-bezier(.75,-0.5,0,1.75);
+}
+.slide-enter, .slide-leave-to{
+    left: 0px;
+}

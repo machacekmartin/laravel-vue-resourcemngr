@@ -5,7 +5,11 @@
             <h4 class="resources-item__title">{{ data.title }}</h4>
             <div class="resources-item__buttons">
                 <template v-if="data.type == 'code'">
+                    <transition name="slide">
+                        <icon icon="checkmark" v-if="showClipped" :width="14" :height="14" class="resources-item__button-popup"></icon>
+                    </transition>
                     <icon-button class="resources-item__button" text="Copy" icon="edit" :iconSize="16" colorMode="dark" @click="copyToClipboard(data.snippet)"></icon-button>
+                    
                     <icon-button class="resources-item__button" icon="plus" :iconSize="16" colorMode="white" @click="toggleShowSnippet()"></icon-button>
                 </template>
                 
@@ -51,7 +55,8 @@ export default {
     data(){
         return {
             showSnippet: false,
-            showPreview: false
+            showPreview: false,
+            showClipped: false
         }
     },
     methods: {
@@ -70,6 +75,11 @@ export default {
         },
         copyToClipboard(text){
             navigator.clipboard.writeText(text)
+
+            this.showClipped = true
+            setTimeout(() => {
+                this.showClipped = false
+            }, 2000)
 
         },
         openLink(link, newTab){
