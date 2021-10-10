@@ -1,36 +1,36 @@
 <template>
-    <div class="resources-item">
-        <div class="resources-item__header">
+    <div class="resources-list-item">
+        <div class="resources-list-item__header">
             <sticker class="resource-item__sticker" :text="data.type"></sticker>
-            <h4 class="resources-item__title">{{ data.title }}</h4>
-            <div class="resources-item__buttons">
+            <h4 class="resources-list-item__title">{{ data.title }}</h4>
+            <div class="resources-list-item__buttons">
                 <template v-if="data.type == 'code'">
                     <transition name="slide">
-                        <icon icon="checkmark" v-if="showClipped" :width="14" :height="14" class="resources-item__button-popup"></icon>
+                        <icon icon="checkmark" v-if="showClipped" :width="14" :height="14" class="resources-list-item__button-popup"></icon>
                     </transition>
-                    <icon-button class="resources-item__button" text="Copy" icon="edit" :iconSize="16" colorMode="dark" @click="copyToClipboard(data.snippet)"></icon-button>
-                    <icon-button class="resources-item__button" :icon="showSnippet ? 'cross' : 'plus'" :iconSize="16" colorMode="white" @click="toggleShowSnippet()"></icon-button>
+                    <icon-button class="resources-list-item__button" text="Copy" icon="edit" :iconSize="16" colorMode="dark" @click="copyToClipboard(data.snippet)"></icon-button>
+                    <icon-button class="resources-list-item__button" :icon="showSnippet ? 'cross' : 'plus'" :iconSize="16" colorMode="white" @click="toggleShowSnippet()"></icon-button>
                 </template>
                 
                 <template v-if="data.type == 'link'">
-                    <icon-button class="resources-item__button" :text="data.link" :icon="data.newTab ? 'next': 'home' " :iconSize="16" colorMode="blue" @click="openLink(data.link, data.newTab)"></icon-button>
+                    <icon-button class="resources-list-item__button" :text="data.link" :icon="data.newTab ? 'next': 'home' " :iconSize="16" colorMode="blue" @click="openLink(data.link, data.newTab)"></icon-button>
                 </template>
 
                 <template v-if="data.type == 'pdf'">
-                    <icon-button class="resources-item__button" text="Download" icon="cross" :iconSize="13" colorMode="dark" @click="downloadFile(data.file)"></icon-button>
-                    <icon-button class="resources-item__button" :icon="showPreview ? 'back' : 'next'" :iconSize="13" colorMode="white" @click="toggleShowPreview()"></icon-button>
+                    <icon-button class="resources-list-item__button" text="Download" icon="cross" :iconSize="13" colorMode="dark" @click="downloadFile(data.file)"></icon-button>
+                    <icon-button class="resources-list-item__button" :icon="showPreview ? 'back' : 'next'" :iconSize="13" colorMode="white" @click="toggleShowPreview()"></icon-button>
                 </template>
             </div>
         </div>
         <transition name="fade" v-if="data.type == 'code'">
-            <div class="resources-item__addition" v-if="showSnippet">
+            <div class="resources-list-item__addition" v-if="showSnippet">
                 <p>{{ data.description }}</p>
                 <code-snippet :content="data.snippet"></code-snippet>
             </div>
         </transition>
         <transition name="fade" v-if="data.type == 'pdf'">
             <template v-if="showPreview">
-                <file-preview class="resources-item__addition resources-item__preview" :file="data.file"></file-preview>
+                <file-preview class="resources-list-item__addition resources-list-item__preview" :file="data.file"></file-preview>
             </template>
         </transition>
     </div>
@@ -40,7 +40,7 @@ import CodeSnippet from './CodeSnippet.vue'
 import FilePreview from './FilePreview.vue'
 
 export default {
-    name: 'ResourcesItem',
+    name: 'ResourcesListItem',
     components: {
         CodeSnippet,
         FilePreview

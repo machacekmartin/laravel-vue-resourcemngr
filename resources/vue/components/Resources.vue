@@ -1,7 +1,5 @@
 <template>
     <div class="resources">  
-        <h1 class="resources__title">Resources</h1>
-
         <search class="resources__search" @keypress="setSearch"></search>
         
         <div class="resources__filters">
@@ -9,19 +7,19 @@
             <checkbox class="resources__filter" type="pdf" @toggled="toggleFilter('pdf')"></checkbox>
             <checkbox class="resources__filter" type="link" @toggled="toggleFilter('link')"></checkbox>
         </div>
-
-        <resources-list :items="foundResources"></resources-list>
+        
+         <resources-layout type="list" :items="foundResources"></resources-layout>
     </div>
 </template>
 
 <script>
 import Search from '../components/Search.vue'
-import ResourcesList from '../components/ResourcesList.vue'
+import ResourcesLayout from '../components/ResourcesLayout.vue'
 
 export default {
     components: {
         Search,
-        ResourcesList
+        ResourcesLayout
     },
     props: {
         resources: {

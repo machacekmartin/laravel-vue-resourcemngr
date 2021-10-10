@@ -12,11 +12,15 @@
 @import 'components/icon-button';
 @import 'components/icon';
 @import 'components/sticker';
+@import 'components/resources-grid';
+
 @import 'components/resources-list';
-@import 'components/resources-item';
+@import 'components/resources-list-item';
 @import 'components/search';
 @import 'components/checkbox';
 @import 'components/file-preview';
 @import 'components/code-snippet';
 
-@import 'components/vue-transitions'
+@import 'components/modal';
+
+@import 'components/vue-transitions';

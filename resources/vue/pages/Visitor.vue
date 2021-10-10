@@ -1,5 +1,6 @@
 <template>
     <div class="page">  
+        <h1>Resources</h1>
         <resources :resources="resourcesArray"></resources>
     </div>
 </template>
