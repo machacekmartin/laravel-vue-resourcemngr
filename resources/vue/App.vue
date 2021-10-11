@@ -5,7 +5,18 @@
 </template>
 
 <script>
-    export default {
-        name: 'app',
-    };
+import { mapActions } from 'vuex'
+export default {
+    name: 'app',
+    methods: {
+        ...mapActions('links', ['LoadLinks']),
+        ...mapActions('files', ['LoadFiles']),
+        ...mapActions('codes', ['LoadCodes']),
+    },
+    mounted(){
+        this.LoadLinks()
+        this.LoadFiles()
+        this.LoadCodes()
+    }
+};
 </script>

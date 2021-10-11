@@ -1,12 +1,14 @@
 <template>
     <div class="resources-grid-item">
-        {{ data.title }}
-        <icon-button @click="edit()" icon="edit" :iconSize="18"></icon-button>
-        <icon-button @click="remove()" icon="trash" :iconSize="18"></icon-button>
+        <h4 class="resources-grid-item__title">{{ data.title }}</h4>
+        <div class="resources-grid-item__body">
+            <sticker class="resources-grid-item__sticker" :type="data.type" :text="data.type"></sticker>
+            <icon-button class="resources-grid-item__button" @click="openEditModal(data.id)" text="Edit" icon="edit" :iconSize="18" colorMode="dark"></icon-button>
+        </div>
     </div>
 </template>
 <script>
-
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
     name: 'ResourcesGridItem',
@@ -16,12 +18,29 @@ export default {
             required: true
         },
     },
-
-    // Editor-related methods need to happen HERE, NOT IN RESOURCESLAYOUT!!!
+    computed: {
+        ...mapGetters('modal', ['getModalPurpose']),
+        ...mapGetters('links', ['getLink']),
+        ...mapGetters('files', ['getFile']),
+        ...mapGetters('codes', ['getCode'])
+    },
     methods: {
-        edit(){
-            // open editing modal from vuex
-            this.$emit('edit')
+        ...mapActions('modal', ['ActivateModal']),
+        
+        openEditModal(id){
+            let resource;
+            switch(this.data.type){
+                case 'link':
+                    resource = this.getLink(id)
+                    break
+                case 'file':
+                    resource = this.getFile(id)
+                    break
+                case 'code':
+                    resource = this.getCode(id)
+                    break
+            }            
+            this.ActivateModal({type: 'edit', purpose: this.data.type, inputData: resource})
         },
     }
 

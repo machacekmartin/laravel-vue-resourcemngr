@@ -23,7 +23,7 @@ export default {
                     newTab: true
                 },
                 {
-                    type: 'pdf',
+                    type: 'file',
                     title: 'My first oficial PDF document',
                     file: '/storage/sample.pdf'
                 },
@@ -58,7 +58,7 @@ export default {
 </form>`
                 },
                 {
-                    type: 'pdf',
+                    type: 'file',
                     title: 'hey2',
                     file: 'https://www.africau.edu/images/default/sample.pdf'
                 },
@@ -75,12 +75,12 @@ export default {
                     newTab: true
                 },
                 {
-                    type: 'pdf',
+                    type: 'file',
                     title: 'hey2',
                     file: 'https://www.africau.edu/images/default/sample.pdf'
                 },
                 {
-                    type: 'pdf',
+                    type: 'file',
                     title: 'hey2',
                     file: 'https://www.africau.edu/images/default/sample.pdf'
                 },

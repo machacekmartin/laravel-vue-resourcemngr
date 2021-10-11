@@ -1,0 +1,46 @@
+.resources-grid-item{
+    min-width: 0;
+    padding: .5rem;
+    background: $color-ultra_light_gray;
+    margin-bottom: .5rem;
+    border-radius: .4rem;
+    
+
+    &__title{
+        position: relative;
+        height: calc(1.5 * 2em); 
+        overflow: hidden;
+
+        &:before{
+            content: '';
+            position: absolute;
+            display: block;
+            width: 100%;
+            height: calc(1.5 * 1em);
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to right, rgba($color-ultra_light_gray, 0) 75%, $color-ultra_light_gray)
+        }
+    }
+
+    &__body{
+        display: flex;
+        align-items: stretch;
+        margin-top: 1rem;
+        
+    }
+
+    &__sticker{
+        align-items: center;
+        margin-right: auto;
+    }
+
+    &__button{
+        &:not(:last-child){
+            margin-right: .5rem;
+        }
+    }
+
+
+    
+}

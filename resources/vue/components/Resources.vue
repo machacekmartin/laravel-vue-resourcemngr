@@ -4,7 +4,7 @@
         
         <div class="resources__filters">
             <checkbox class="resources__filter" type="code" @toggled="toggleFilter('code')"></checkbox>
-            <checkbox class="resources__filter" type="pdf" @toggled="toggleFilter('pdf')"></checkbox>
+            <checkbox class="resources__filter" type="file" @toggled="toggleFilter('file')"></checkbox>
             <checkbox class="resources__filter" type="link" @toggled="toggleFilter('link')"></checkbox>
         </div>
         

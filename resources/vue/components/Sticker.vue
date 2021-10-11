@@ -12,11 +12,15 @@ export default {
             type: String,
             required: true
         },
+        type: {
+            type: String,
+            required: true
+        },
     },
     computed: {
         getTypeByText(){
             switch(this.text){
-                case 'pdf':
+                case 'file':
                     return 'orange'
                 case 'link':
                     return 'pink'

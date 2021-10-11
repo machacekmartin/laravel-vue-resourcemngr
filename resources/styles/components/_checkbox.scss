@@ -24,7 +24,7 @@
             opacity: 1;
         }
 
-        &#{ $self }--pdf{
+        &#{ $self }--file{
             @include bgAndHover($color-orange);
         }
         &#{ $self }--link{

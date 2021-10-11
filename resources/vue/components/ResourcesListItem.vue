@@ -1,7 +1,7 @@
 <template>
     <div class="resources-list-item">
         <div class="resources-list-item__header">
-            <sticker class="resource-item__sticker" :text="data.type"></sticker>
+            <sticker class="resource-item__sticker" :text="data.type" :type="data.type"></sticker>
             <h4 class="resources-list-item__title">{{ data.title }}</h4>
             <div class="resources-list-item__buttons">
                 <template v-if="data.type == 'code'">
@@ -16,7 +16,7 @@
                     <icon-button class="resources-list-item__button" :text="data.link" :icon="data.newTab ? 'next': 'home' " :iconSize="16" colorMode="blue" @click="openLink(data.link, data.newTab)"></icon-button>
                 </template>
 
-                <template v-if="data.type == 'pdf'">
+                <template v-if="data.type == 'file'">
                     <icon-button class="resources-list-item__button" text="Download" icon="cross" :iconSize="13" colorMode="dark" @click="downloadFile(data.file)"></icon-button>
                     <icon-button class="resources-list-item__button" :icon="showPreview ? 'back' : 'next'" :iconSize="13" colorMode="white" @click="toggleShowPreview()"></icon-button>
                 </template>
@@ -28,7 +28,7 @@
                 <code-snippet :content="data.snippet"></code-snippet>
             </div>
         </transition>
-        <transition name="fade" v-if="data.type == 'pdf'">
+        <transition name="fade" v-if="data.type == 'file'">
             <template v-if="showPreview">
                 <file-preview class="resources-list-item__addition resources-list-item__preview" :file="data.file"></file-preview>
             </template>
