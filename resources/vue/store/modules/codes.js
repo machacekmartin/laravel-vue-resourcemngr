@@ -65,6 +65,20 @@ const actions = {
         })
         commit('setCodes', codes)
         
+    },
+    async DeleteCode({state, commit}, id){
+        //https.$delete...
+    },
+    async CreateCode({ state, commit }, formData){
+        console.log(formData)
+
+        //let response = await this.$http.post('/api/codes/create', formData).data
+        // return response.code OK/ERR
+    },
+    async EditCode({ state, commit }, formData){
+        // get id from formData, 
+        //http.edit based on id from formData
+
     }
 };
 const mutations = {

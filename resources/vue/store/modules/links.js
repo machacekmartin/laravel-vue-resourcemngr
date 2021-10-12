@@ -42,11 +42,18 @@ const actions = {
         commit('setLinks', links)
         
     },
+    async DeleteLink({state, commit}, id){
+        //
+    },
     async CreateLink({ state, commit }, formData){
         console.log(formData)
 
         //let response = await this.$http.post('/api/links/create', formData).data
         // return response.code OK/ERR
+    },
+    async EditLink({ state, commit }, formData){
+        // get id from formData, 
+        //http.edit based on id from formData
     }
 };
 const mutations = {

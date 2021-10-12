@@ -36,7 +36,19 @@ const actions = {
             file.type = 'file'
         })
         commit('setFiles', files)
-        
+    },
+    async DeleteFile({state, commit}, id){
+        //https.$delete...
+    },
+    async CreateFile({ state, commit }, formData){
+        console.log(formData)
+
+        //let response = await this.$http.post('/api/files/create', formData).data
+        // return response.code OK/ERR
+    },
+    async EditFile({ state, commit }, formData){
+        // get id from formData, 
+        //http.edit based on id from formData
     }
 };
 const mutations = {

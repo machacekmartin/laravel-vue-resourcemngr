@@ -25,6 +25,10 @@
             type: {
                 type: String,
                 default: 'link'
+            },
+            error: {
+                type: String,
+                required: false
             }
         },
         data() {

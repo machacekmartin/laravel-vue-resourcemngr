@@ -39,6 +39,10 @@
             value: {
                 type: String,
                 required: false
+            },
+            error: {
+                type: String,
+                required: false
             }
         },
 

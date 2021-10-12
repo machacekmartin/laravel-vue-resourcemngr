@@ -3,6 +3,16 @@
     &--spacing{
         margin-top: 1rem
     }
+    &__header{
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__error{
+        font-weight: bold;
+        color: $color-ruby;
+    }
+
     &-text{
         &__wrapper{
             position: relative;

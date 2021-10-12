@@ -1,6 +1,10 @@
 <template>
     <div class="input input-text">
-        <p class="input__title">{{ title }}</p>    
+        <div class="input__header">
+            <p class="input__title">{{ title }}</p> 
+            <small class="input__error" v-if="error">{{ error }}</small>   
+        </div>
+        
         <template v-if="value">
             <div v-if="editing" class="input-text__wrapper">
                 <input type="text" class="input-text__field" v-model="localValue"/>  
@@ -33,6 +37,10 @@
                 required: true
             },
             value: {
+                type: String,
+                required: false
+            },
+            error: {
                 type: String,
                 required: false
             }
