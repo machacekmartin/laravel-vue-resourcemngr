@@ -1,115 +1,70 @@
 <template>
     <div class="page">  
-        <h1>Resources</h1>
-        <resources :resources="resourcesArray"></resources>
+        <div class="page__header">
+            <h1>Resources</h1>
+        </div>
+        <div class="page__mt-2">
+            <search @keypress="setSearch"></search>
+        </div>
+        
+        <div class="page__mt-2">
+            <checkbox type="code" @toggled="toggleFilter('code')"></checkbox>
+            <checkbox type="file" @toggled="toggleFilter('file')"></checkbox>
+            <checkbox type="link" @toggled="toggleFilter('link')"></checkbox>
+        </div>
+        <div class="page__mt-1">
+            <resources-layout type="list" :items="resources"></resources-layout>
+        </div>
     </div>
 </template>
 
 <script>
-import Resources from '../components/Resources.vue'
+import { mapGetters } from 'vuex'
+import { getResourcesWithString, getResourcesByTypes  } from '../helpers/search'
+import Search from '../components/Search.vue'
+
+import ResourcesLayout from '../components/ResourcesLayout.vue'
 
 export default {
     components: {
-        Resources
+        Search,
+        ResourcesLayout
     },
     data(){
         return {
-            search: '',
-            resourcesArray: [
-                {
-                    type: 'link',
-                    title: 'ASD NKASD JNKLASD JNKL ASDKJNASD JNKASD jnklasd ',
-                    link: 'https://www.gogle.com/docs/documents/awdjnawd',
-                    newTab: true
-                },
-                {
-                    type: 'file',
-                    title: 'My first oficial PDF document',
-                    file: '/storage/sample.pdf'
-                },
-                {
-                    type: 'code',
-                    title: 'hey1',
-                    description: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.`,
-                    snippet: 
-`<form action="http://maps.google.com/maps" method="get" target="_blank">
-   <label for="saddr">Enter your location</label>
-   <input type="text" name="saddr" />
-   <input type="hidden" name="daddr" value="350 5th Ave New York, NY 10018 (Empire State Building ) 350 5th Ave New York, NY 10018 (Empire State Building)" />
-   <input type="submit" value="Get directions" />
-</form>
-<form action="http://maps.google.com/maps" method="get" target="_blank">
-   <label for="saddr">Enter your location</label>
-   <input type="text" name="saddr" />
-   <input type="hidden" name="daddr" value="350 5th Ave New York, NY 10018 (Empire State Building)" />
-   <input type="submit" value="Get directions" />
-</form>
-<form action="http://maps.google.com/maps" method="get" target="_blank">
-   <label for="saddr">Enter your location</label>
-   <input type="text" name="saddr" />
-   <input type="hidden" name="daddr" value="350 5th Ave New York, NY 10018 (Empire State Building ) 350 5th Ave New York, NY 10018 (Empire State Building)" />
-   <input type="submit" value="Get directions" />
-</form>
-<form action="http://maps.google.com/maps" method="get" target="_blank">
-   <label for="saddr">Enter your location</label>
-   <input type="text" name="saddr" />
-   <input type="hidden" name="daddr" value="350 5th Ave New York, NY 10018 (Empire State Building)" />
-   <input type="submit" value="Get directions" />
-</form>`
-                },
-                {
-                    type: 'file',
-                    title: 'hey2',
-                    file: 'https://www.africau.edu/images/default/sample.pdf'
-                },
-                {
-                    type: 'link',
-                    title: 'ASD NKASD JNKLASD JNKL ASDKJNASD JNKASD jnklasd ',
-                    link: 'https://www.gogle.com/docs',
-                    newTab: false
-                },
-                {
-                    type: 'link',
-                    title: 'hey3',
-                    link: 'https://www.gogle.com/docs/documents/',
-                    newTab: true
-                },
-                {
-                    type: 'file',
-                    title: 'hey2',
-                    file: 'https://www.africau.edu/images/default/sample.pdf'
-                },
-                {
-                    type: 'file',
-                    title: 'hey2',
-                    file: 'https://www.africau.edu/images/default/sample.pdf'
-                },
-                {
-                    type: 'link',
-                    title: 'ASD NKASD JNKLASD JNKL ASDKJNASD JNKASD jnklasd ',
-                    link: 'https://www.gogle.com',
-                    newTab: true
-                },
-                {
-                    type: 'code',
-                    title: 'hey1',
-                    description: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.`,
-                    snippet: 
-`<form action="http://maps.google.com/maps" method="get" target="_blank">
-   <label for="saddr">Enter your location</label>
-   <input type="text" name="saddr" />
-   <input type="hidden" name="daddr" value="350 5th Ave New York, NY 10018 (Empire State Building ) 350 5th Ave New York, NY 10018 (Empire State Building)" />
-   <input type="submit" value="Get directions" />
-</form>
-<form action="http://maps.google.com/maps" method="get" target="_blank">
-   <label for="saddr">Enter your location</label>
-   <input type="text" name="saddr" />
-   <input type="hidden" name="daddr" value="350 5th Ave New York, NY 10018 (Empire State Building)" />
-   <input type="submit" value="Get directions" />
-</form>`
-                },
-            ]
+            searchString: '',
+            activeFilters: [],
         }
     },
+    computed: {
+        ...mapGetters('links', ['getLinks']),
+        ...mapGetters('files', ['getFiles']),
+        ...mapGetters('codes', ['getCodes']),
+
+        combinedResources(){
+            return [...this.getLinks, ...this.getCodes, ...this.getFiles]
+        },
+        resources(){
+            const filteredResources = getResourcesByTypes(this.combinedResources, this.activeFilters);
+            return getResourcesWithString(filteredResources, this.searchString)
+        }
+    },
+    methods: {
+        setSearch(string){
+            this.searchString = string
+        },
+        toggleFilter(toggledFilter){
+            if (this.activeFilters.includes(toggledFilter)){
+                const index = this.activeFilters.indexOf(toggledFilter)
+                this.activeFilters.splice(index, 1)
+            }
+            else{
+                this.activeFilters.push(toggledFilter)
+            }
+        },
+    },
+    mounted(){
+        this.activeFilters = [... new Set(this.combinedResources.map(res => res.type))]
+    }
 }
 </script>

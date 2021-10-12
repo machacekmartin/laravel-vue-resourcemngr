@@ -15,25 +15,25 @@ const actions = {
                 id: 0,
                 title: 'ASD NKASD JNKLASD JNKL ASDKJNASD JNKASD jnklasd ASD NKASD JNKLASD JNKL ASDKJNASD JNKASD jnklasd ASD',
                 path: 'https://www.gogle.com/docs/documents/awdjnawd',
-                newTab: true
+                newtab: true
             },
             {
                 id: 1,
                 title: 'ASD NKASD JNKLASD JNKL ASDKJNASD JNKASD jnklasd ',
                 path: 'https://www.gogle.com/docs',
-                newTab: false
+                newtab: false
             },
             {
                 id: 2,
                 title: 'hey3',
                 path: 'https://www.gogle.com/docs/documents/',
-                newTab: true
+                newtab: true
             },
             {
                 id: 3,
                 title: 'ASD NKASD JNKLASD JNKL ASDKJNASD JNKASD jnklasd ',
                 path: 'https://www.gogle.com',
-                newTab: true
+                newtab: true
             },   
         ]
         links.map(link => {
@@ -41,6 +41,12 @@ const actions = {
         })
         commit('setLinks', links)
         
+    },
+    async CreateLink({ state, commit }, formData){
+        console.log(formData)
+
+        //let response = await this.$http.post('/api/links/create', formData).data
+        // return response.code OK/ERR
     }
 };
 const mutations = {

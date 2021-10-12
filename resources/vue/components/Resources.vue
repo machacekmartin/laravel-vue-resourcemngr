@@ -1,20 +1,13 @@
 <template>
     <div class="resources">  
-        <search class="resources__search" @keypress="setSearch"></search>
-        
-        <div class="resources__filters">
-            <checkbox class="resources__filter" type="code" @toggled="toggleFilter('code')"></checkbox>
-            <checkbox class="resources__filter" type="file" @toggled="toggleFilter('file')"></checkbox>
-            <checkbox class="resources__filter" type="link" @toggled="toggleFilter('link')"></checkbox>
-        </div>
-        
-         <resources-layout type="list" :items="foundResources"></resources-layout>
+
     </div>
 </template>
 
 <script>
 import Search from '../components/Search.vue'
 import ResourcesLayout from '../components/ResourcesLayout.vue'
+import { getResourcesWithString } from '../helpers/search'
 
 export default {
     components: {
@@ -35,14 +28,7 @@ export default {
     },
     computed: {
         foundResources(){
-            if (this.search !== ''){
-                return this.filteredResources.filter(resource => {
-                    return resource.title.includes(this.search) || 
-                    resource.type.includes(this.search) ||
-                    resource.link?.includes(this.search)
-                })
-            }
-            return this.filteredResources;
+            return getResourcesWithString(this.filteredResources, this.search)
         },
         filteredResources(){
             return this.resources.filter(resource => {

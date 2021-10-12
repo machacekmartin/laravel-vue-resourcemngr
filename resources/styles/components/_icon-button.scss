@@ -48,8 +48,8 @@
         }
         &:hover{
             #{ $self }__icon{
-                background-color: $color-light_gray;
-                fill: $color-white
+                background-color: $color-dark_gray;
+                fill: $color-white;
             }
         }
     }

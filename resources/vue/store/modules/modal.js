@@ -1,6 +1,9 @@
+import { getFormModel } from '../../helpers/form-model-picker'
+
 const state = {
     type: null,
     purpose: null,
+    inputs: null,
     inputData: null,
     formData: new FormData()
 };
@@ -13,25 +16,36 @@ const getters = {
     },
     getModalInputData: (state) => state.inputData,
     getModalType: (state) => state.type,
-    getModalPurpose: (state) => state.purpose
+    getModalPurpose: (state) => state.purpose,
+    getModalInputs: (state) => state.inputs,
+    getModalFormData: (state) => state.formData
 };
 const actions = {
     UpdateFormData({ commit }, input){
         commit('setFormData', input)
-        if (input.value == '' || input.value === null){
+        if (input.value === '' || input.value === null){
             commit('removeFormData', input)
+        }
+        console.log("=============")
+        for (let key of state.formData.keys()){
+            console.log("key |", key)
+        }
+        for (let value of state.formData.values()){
+            console.log("value | ", value)
         }
     },
     ActivateModal({ commit }, modal){
         commit('setType', modal.type)
         commit('setPurpose', modal.purpose)
+        commit('setInputs', getFormModel(modal.purpose))
         commit('setInputData', modal.inputData)
         commit('clearFormData')
     },
 
-    DeactivateModel({ commit }){
+    DeactivateModal({ commit }){
         commit('setType', null)
         commit('setPurpose', null)
+        commit('setInputs', null)
         commit('setInputData', null)
         commit('clearFormData')
     },
@@ -42,6 +56,9 @@ const mutations = {
     },
     setPurpose(state, purpose){
         state.purpose = purpose
+    },
+    setInputs(state, inputs){
+        state.inputs = inputs
     },
     setInputData(state, inputData){
         state.inputData = inputData

@@ -8,17 +8,17 @@
                     <transition name="slide">
                         <icon icon="checkmark" v-if="showClipped" :width="14" :height="14" class="resources-list-item__button-popup"></icon>
                     </transition>
-                    <icon-button class="resources-list-item__button" text="Copy" icon="edit" :iconSize="16" colorMode="dark" @click="copyToClipboard(data.snippet)"></icon-button>
-                    <icon-button class="resources-list-item__button" :icon="showSnippet ? 'cross' : 'plus'" :iconSize="16" colorMode="white" @click="toggleShowSnippet()"></icon-button>
+                    <icon-button class="resources-list-item__button" text="Copy" icon="copy" :iconSize="16" colorMode="dark" @click="copyToClipboard(data.snippet)"></icon-button>
+                    <icon-button class="resources-list-item__button" :icon="showSnippet ? 'hide' : 'show'" :iconSize="20" colorMode="white" @click="toggleShowSnippet()"></icon-button>
                 </template>
                 
                 <template v-if="data.type == 'link'">
-                    <icon-button class="resources-list-item__button" :text="data.link" :icon="data.newTab ? 'next': 'home' " :iconSize="16" colorMode="blue" @click="openLink(data.link, data.newTab)"></icon-button>
+                    <icon-button class="resources-list-item__button" :text="data.path" :icon="data.newtab ? 'newtab': 'next' " :iconSize="18" colorMode="blue" @click="openLink(data.path, data.newtab)"></icon-button>
                 </template>
 
                 <template v-if="data.type == 'file'">
-                    <icon-button class="resources-list-item__button" text="Download" icon="cross" :iconSize="13" colorMode="dark" @click="downloadFile(data.file)"></icon-button>
-                    <icon-button class="resources-list-item__button" :icon="showPreview ? 'back' : 'next'" :iconSize="13" colorMode="white" @click="toggleShowPreview()"></icon-button>
+                    <icon-button class="resources-list-item__button" text="Download" icon="download" :iconSize="20" colorMode="dark" @click="downloadFile(data.file)"></icon-button>
+                    <icon-button class="resources-list-item__button" :icon="showPreview ? 'hide' : 'show'" :iconSize="20" colorMode="white" @click="toggleShowPreview()"></icon-button>
                 </template>
             </div>
         </div>
@@ -81,8 +81,8 @@ export default {
             }, 2000)
 
         },
-        openLink(link, newTab){
-            if (newTab){
+        openLink(link, newtab){
+            if (newtab){
                 window.open(link)
             }
             else{

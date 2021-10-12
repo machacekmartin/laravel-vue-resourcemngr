@@ -1,5 +1,5 @@
 <template>
-    <button class="icon-button" :class="'icon-button--'+ colorMode" @click="emitClick()" aria-label="button">
+    <button class="icon-button" :class="'icon-button--'+ colorMode" @click="emitClick()" aria-label="button" type="button">
         <div v-if="text" class="icon-button__content">
             <span class="icon-button__text">{{ text }}</span>
         </div>

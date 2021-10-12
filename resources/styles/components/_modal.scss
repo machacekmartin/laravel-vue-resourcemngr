@@ -8,8 +8,9 @@
     height: 100%;
     top: 0;
     left: 0;
-    background-color: rgba($color-dark_gray, .4);
+    background-color: rgba($color-black, .25);
     z-index: 100;
+    backdrop-filter: blur(25px);
 
     &__content{
         max-width: 800px;
@@ -19,6 +20,7 @@
 
     &__header{
         display: flex;
+        align-items: center;
     }
 
     &__footer{
@@ -31,11 +33,21 @@
 
     &__window{
         width: 100%;
-        margin: .5rem 0;
-        padding: 1rem;
+        margin: .25rem 0;
+        padding: .5rem 1rem 2rem;
         border-radius: .4rem;
         background-color: $color-white;
-        box-shadow: 0 0 15px -8px rgba($color-dark_gray, .5)
+        box-shadow: 0 0 15px -8px rgba($color-dark_gray, .5);
+
+        @media (min-width: 550px){
+            margin: .5rem 0;
+            padding: 2rem;
+        }
     }
 
+    &__button{
+        &:last-child{
+            margin-left: auto;
+        }
+    }
 }

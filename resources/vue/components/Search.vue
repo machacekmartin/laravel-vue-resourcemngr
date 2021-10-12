@@ -1,6 +1,6 @@
 <template>
     <div class="search">
-        <icon class="search__icon" icon="locate" :width="20" :height="20"></icon>
+        <icon class="search__icon" icon="search" :width="20" :height="20"></icon>
         <input class="search__input" placeholder="Search by keyword or something.." v-model="input">
     </div>
 </template>

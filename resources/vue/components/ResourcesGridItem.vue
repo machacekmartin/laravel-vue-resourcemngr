@@ -17,6 +17,10 @@ export default {
             type: Object,
             required: true
         },
+        error: {
+            type: Object,
+            required: false
+        }
     },
     computed: {
         ...mapGetters('modal', ['getModalPurpose']),

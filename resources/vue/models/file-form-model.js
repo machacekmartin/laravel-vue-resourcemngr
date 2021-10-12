@@ -8,7 +8,7 @@ export default [
     {
         component: 'file',
         name: 'file',
-        description: "Select your file",
+        description: "Select your file (.pdf)",
         editable: true
     }
 ];

@@ -7,7 +7,7 @@
     cursor: pointer;
     overflow: hidden;
     transition: .15s;
-    border: solid .15rem $color_light_gray;
+    border: solid 1px $color_light_gray;
 
     @media (min-width: 550px){
         padding: 0 1rem;
@@ -36,7 +36,7 @@
     }
 
     &__text{
-        color: $color_light_gray;
+        color: $color-dark_gray;
         font-weight: bold;
         transition: .15s;
     }
