@@ -17,8 +17,8 @@
 # Tech 
  ## Laravel & API
  Laravel side contains an API from which the app retrieves & manipulates data. 
- The API is divided into 2 groups (visitors/editor), each has it's own controller (`VisitorController`, `EditorController`). 
- All API access points are specifies in `routes/api.php`, each resource type has an endpoint for creating, editing and deleting, as well as retrieving.
+ The API is divided into 2 groups (visitor/editor), each has it's own controller (`VisitorController`, `EditorController`). 
+ All API access points are specified in `routes/api.php`, each resource type has an endpoint for creating, editing and deleting, as well as retrieving.
 
  ## Models & DB 
  Each resource type has its own model, which is bound to one MySQL DB table (model `File` is bound to table `files`, model `Code` is bound to table `codes` etc). Each table has it's own 'create table' migration ready.
@@ -75,7 +75,7 @@ After successfull setup, the app should look like this:
 Resources are empty, you need to add them. click on "Editor" on the bottom navigation and Create a new resource, f.e File (pdf).
 ![alt text](https://user-images.githubusercontent.com/33912290/137172603-bb2eefc6-c8c5-4862-b1cb-b4015ef0bd23.png)
 
-After creating a couple of resources, the visitors's page should look like this:
+After creating a couple of resources, the visitors' page should look like this:
 ![alt text](https://user-images.githubusercontent.com/33912290/137178710-f9ac70fc-d390-4215-aba2-8fb3c7e6813f.png)
 
  
