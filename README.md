@@ -64,7 +64,7 @@
     
  3. Go to your cloned/downloaded folder's root, run `cp .env.example .env`, `composer install` and `php artisan migrate` (Set the database connection in .env before migrating)
  4. Install Node.js (16.8) and NPM (7.2) and run `npm i`
- 5. Build the app via `npm run dev` or `npm run prod`, open browser and add your server's address (my is `resourcemngr.test`)
+ 5. Build the app via `npm run dev` or `npm run prod`, open browser and add your server's address (my is `https://resourcemngr.test` - HTTPS is important)
 
 
 
