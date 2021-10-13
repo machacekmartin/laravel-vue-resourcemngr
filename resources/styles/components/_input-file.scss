@@ -1,0 +1,36 @@
+.input-file{
+    &__wrapper{
+        position: relative;
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        background-color: darken($color-ultra_light_gray, 5%);
+        border-radius: .4rem;
+        border: solid 1px $color-light_gray;
+        cursor: pointer;
+        transition: .15s;
+
+        &:hover{
+            background-color: darken($color-ultra_light_gray, 7%);
+        }
+    }
+    &__preview{
+        height: 300px;
+    }
+    &__controls{
+        position: absolute;
+        display: flex;
+        top: .5rem;
+        left: .75rem;
+    }
+    &__control{
+        margin-right: .5rem;
+    }
+    &__field{
+        display: none;
+    }
+    &__icon{
+        padding: 2rem 1rem;
+        fill: $color-light_gray;
+    }
+}

@@ -10,7 +10,9 @@
         <div class="page__mt-2">
             <resources-layout type="grid" :items="resources"></resources-layout>
         </div>
-        <modal-form v-if="isModalActive"></modal-form>
+        <transition name="fade">
+            <modal-form v-if="isModalActive"></modal-form>
+        </transition>
     </div>
 </template>
 
@@ -28,7 +30,7 @@ export default {
         Search,
         ResourcesLayout,
         ModalForm,
-        DropdownInput
+        DropdownInput,
     },
     data(){
         return {

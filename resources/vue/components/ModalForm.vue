@@ -57,7 +57,7 @@ export default {
     methods: {
         ...mapActions('loading', ['SetLoading']),
         ...mapActions('modal', ['DeactivateModal', 'UpdateFormData']),
-        ...mapActions('links', ['CreateLink', 'DeleteLink', 'EditLink']),
+        ...mapActions('links', ['LoadLinks', 'CreateLink', 'DeleteLink', 'EditLink']),
         ...mapActions('codes', ['CreateCode', 'DeleteCode', 'EditCode']),
         ...mapActions('files', ['CreateFile', 'DeleteFile', 'EditFile']),
         getCurrentData(input){
@@ -71,20 +71,21 @@ export default {
         },
         async remove(){
             this.SetLoading(true)
-            const id = this.getModalInputData['id'];
-            console.log(id);
+            
             let response
             switch(this.getModalPurpose){
                 case 'link':
-                    response = await this.DeleteLink(id)
+                    response = await this.DeleteLink(this.getModalInputData)
                     break
                 case 'file':
-                    response = await this.DeleteFile(id)
+                    response = await this.DeleteFile(this.getModalInputData)
                     break
                 case 'code':
-                    response = await this.DeleteCode(id)
+                    response = await this.DeleteCode(this.getModalInputData)
                     break
             }
+            this.SetLoading(false)
+            this.DeactivateModal()
         },
         async edit(){
             this.SetLoading(true)
@@ -92,19 +93,17 @@ export default {
             let response
             switch(this.getModalPurpose){
                 case 'link':
-                    response = await this.EditLink(this.getModalFormData)
+                    response = await this.EditLink({formData: this.getModalFormData, id: this.getModalInputData.id})
                     break
                 case 'file':
-                    response = await this.EditFile(this.getModalFormData)
+                    response = await this.EditFile({formData: this.getModalFormData, id: this.getModalInputData.id})
                     break
                 case 'code':
-                    response = await this.EditCode(this.getModalFormData)
+                    response = await this.EditCode({formData: this.getModalFormData, id: this.getModalInputData.id})
                     break
-            //loading = false
-            }
-            this.errors = {
-                'title': 'required' 
-            }
+            }          
+            this.SetLoading(false)
+            this.DeactivateModal()
         },
         async create(){
             this.SetLoading(true)
@@ -120,11 +119,9 @@ export default {
                 case 'code':
                     response = await this.CreateCode(this.getModalFormData)
                     break
-            //loading = false
             }
-            /*if (response.NOT OK){
-                response.errors
-            }*/
+            this.SetLoading(false)
+            this.DeactivateModal()
         }
     },
 };

@@ -19,7 +19,7 @@
                 required: true
             },
             value: {
-                type: Boolean,
+                type: Number,
                 required: false
             },
             type: {

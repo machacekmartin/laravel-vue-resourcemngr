@@ -3,7 +3,8 @@
         <div class="input input-dropdown">
             <button type="button" class="input-dropdown__toggle" @click="toggleDropdown">
                 <span class="input-dropdown__text"> {{ title }} </span>
-                <icon icon="plus" :width="16" :height="16"></icon>
+                <icon v-if="dropdownActive" icon="cross" :width="16" :height="13"></icon>
+                <icon v-else icon="plus" :width="16" :height="16"></icon>
             </button>
 
             <ul class="input-dropdown__list" v-if="dropdownActive">

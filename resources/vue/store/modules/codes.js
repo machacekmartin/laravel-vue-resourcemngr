@@ -1,3 +1,5 @@
+import axios from "axios";
+
 const state = {
     codes: null,
 };
@@ -8,80 +10,61 @@ const getters = {
     }
 };
 const actions = {
-    async LoadCodes({ commit }){
-        //const codes = await this.$http.get('')
-        let codes = [
-            {
-                id: 0,
-                title: 'hey1',
-                description: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.`,
-                snippet: 
-`<form action="http://maps.google.com/maps" method="get" target="_blank">
-    <label for="saddr">Enter your location</label>
-    <input type="text" name="saddr" />
-    <input type="hidden" name="daddr" value="350 5th Ave New York, NY 10018 (Empire State Building ) 350 5th Ave New York, NY 10018 (Empire State Building)" />
-    <input type="submit" value="Get directions" />
-</form>
-<form action="http://maps.google.com/maps" method="get" target="_blank">
-    <label for="saddr">Enter your location</label>
-        <input type="text" name="saddr" />
-    <input type="hidden" name="daddr" value="350 5th Ave New York, NY 10018 (Empire State Building)" />
-    <input type="submit" value="Get directions" />
-</form>
-<form action="http://maps.google.com/maps" method="get" target="_blank">
-    <label for="saddr">Enter your location</label>
-    <input type="text" name="saddr" />
-    <input type="hidden" name="daddr" value="350 5th Ave New York, NY 10018 (Empire State Building ) 350 5th Ave New York, NY 10018 (Empire State Building)" />
-    <input type="submit" value="Get directions" />
-</form>
-<form action="http://maps.google.com/maps" method="get" target="_blank">
-    <label for="saddr">Enter your location</label>
-    <input type="text" name="saddr" />
-    <input type="hidden" name="daddr" value="350 5th Ave New York, NY 10018 (Empire State Building)" />
-    <input type="submit" value="Get directions" />
-</form>`
-            },
-            {
-                id: 1,
-                title: 'hey1',
-                description: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.`,
-                snippet: 
-`<form action="http://maps.google.com/maps" method="get" target="_blank">
-<label for="saddr">Enter your location</label>
-<input type="text" name="saddr" />
-<input type="hidden" name="daddr" value="350 5th Ave New York, NY 10018 (Empire State Building ) 350 5th Ave New York, NY 10018 (Empire State Building)" />
-<input type="submit" value="Get directions" />
-</form>
-<form action="http://maps.google.com/maps" method="get" target="_blank">
-<label for="saddr">Enter your location</label>
-<input type="text" name="saddr" />
-<input type="hidden" name="daddr" value="350 5th Ave New York, NY 10018 (Empire State Building)" />
-<input type="submit" value="Get directions" />
-</form>`
-            },
-        ]
+    async LoadCodes({ state, commit }){
+        let codes = (await axios({
+            method: 'GET',
+            url: '/api/codes'
+        })).data
+        
         codes.map(code => {
             code.type = 'code'
         })
-        commit('setCodes', codes)
-        
-    },
-    async DeleteCode({state, commit}, id){
-        //https.$delete...
+        commit('setCodes', codes)        
     },
     async CreateCode({ state, commit }, formData){
-        console.log(formData)
-
-        //let response = await this.$http.post('/api/codes/create', formData).data
-        // return response.code OK/ERR
+        let code = (await axios({
+            method: 'POST',
+            url: 'api/codes',
+            data: formData
+        })).data
+        code.type = 'code'
+        
+        commit('addCode', code)
     },
-    async EditCode({ state, commit }, formData){
-        // get id from formData, 
-        //http.edit based on id from formData
+    async EditCode({ state, commit }, data){
+        
+        data.formData.append('_method', 'PATCH')
+        let newCode = (await axios({
+            method: 'POST',
+            url: 'api/codes/'+ data.id,
+            data: data.formData
+        })).data
 
-    }
+        const index = state.codes.findIndex(code => code.id === data.id)
+        commit('updateCode', {code: newCode, index: index})
+    },
+    async DeleteCode({state, commit}, code){ 
+        const index = state.codes.indexOf(code)
+
+        let response = (await axios({
+            method: 'POST',
+            url: 'api/codes/'+ code.id,
+            data: {'_method': 'DELETE'}
+        })).data
+
+        commit('removeCode', index)
+    },
 };
 const mutations = {
+    updateCode(state, {code, index}){
+        Object.assign(state.codes[index], code)
+    },
+    removeCode(state, index){
+        state.codes.splice(index, 1)
+    },
+    addCode(state, code){
+        state.codes.push(code)
+    },
     setCodes(state, codes){
         state.codes = codes
     }

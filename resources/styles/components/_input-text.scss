@@ -1,0 +1,40 @@
+.input-text{
+    &__wrapper{
+        position: relative;
+        display: flex;
+        align-items: center;
+    }
+    &__field{
+        display: flex;
+        width: 100%;
+        padding: 1rem 4rem 1rem 1rem;
+        border-radius: .4rem;
+        background-color: darken($color-ultra_light_gray, 5%);
+        border: solid 1px $color-light_gray;
+    }
+
+    &__placeholder{
+        position: relative;
+        justify-content: space-between;
+        align-items: center;
+        background-color: $color-ultra_light_gray;
+        cursor: pointer;
+    }
+
+    &__text{
+        max-width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    &__icon{
+        position: absolute;
+        right: .5rem;
+
+        &--simple{
+            fill: $color-black;
+            right: 1.25rem;
+        }
+    }
+}

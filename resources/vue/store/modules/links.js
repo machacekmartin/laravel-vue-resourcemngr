@@ -1,3 +1,5 @@
+import axios from "axios";
+
 const state = {
     links: null,
 };
@@ -8,55 +10,60 @@ const getters = {
     }
 };
 const actions = {
-    async LoadLinks({ commit }){
-        //const links = await this.$http.get('')
-        let links = [
-            {
-                id: 0,
-                title: 'ASD NKASD JNKLASD JNKL ASDKJNASD JNKASD jnklasd ASD NKASD JNKLASD JNKL ASDKJNASD JNKASD jnklasd ASD',
-                path: 'https://www.gogle.com/docs/documents/awdjnawd',
-                newtab: true
-            },
-            {
-                id: 1,
-                title: 'ASD NKASD JNKLASD JNKL ASDKJNASD JNKASD jnklasd ',
-                path: 'https://www.gogle.com/docs',
-                newtab: false
-            },
-            {
-                id: 2,
-                title: 'hey3',
-                path: 'https://www.gogle.com/docs/documents/',
-                newtab: true
-            },
-            {
-                id: 3,
-                title: 'ASD NKASD JNKLASD JNKL ASDKJNASD JNKASD jnklasd ',
-                path: 'https://www.gogle.com',
-                newtab: true
-            },   
-        ]
+    async LoadLinks({ state, commit }){
+        let links = (await axios({
+            method: 'GET',
+            url: '/api/links'
+        })).data
+        
         links.map(link => {
             link.type = 'link'
         })
-        commit('setLinks', links)
-        
-    },
-    async DeleteLink({state, commit}, id){
-        //
+        commit('setLinks', links)        
     },
     async CreateLink({ state, commit }, formData){
-        console.log(formData)
-
-        //let response = await this.$http.post('/api/links/create', formData).data
-        // return response.code OK/ERR
+        let link = (await axios({
+            method: 'POST',
+            url: 'api/links',
+            data: formData
+        })).data
+        link.type = 'link'
+        
+        commit('addLink', link)
     },
-    async EditLink({ state, commit }, formData){
-        // get id from formData, 
-        //http.edit based on id from formData
-    }
+    async EditLink({ state, commit }, data){
+        data.formData.append('_method', 'PATCH')
+        let newLink = (await axios({
+            method: 'POST',
+            url: 'api/links/'+ data.id,
+            data: data.formData
+        })).data
+
+        const index = state.links.findIndex(link => link.id === data.id)
+        commit('updateLink', {link: newLink, index: index})
+    },
+    async DeleteLink({state, commit}, link){ 
+        const index = state.links.indexOf(link)
+
+        let response = (await axios({
+            method: 'POST',
+            url: 'api/links/'+ link.id,
+            data: {'_method': 'DELETE'}
+        })).data
+
+        commit('removeLink', index)
+    },
 };
 const mutations = {
+    updateLink(state, {link, index}){
+        Object.assign(state.links[index], link)
+    },
+    removeLink(state, index){
+        state.links.splice(index, 1)
+    },
+    addLink(state, link){
+        state.links.push(link)
+    },
     setLinks(state, links){
         state.links = links
     }

@@ -8,9 +8,9 @@
         </div>
         
         <div class="page__mt-2">
-            <checkbox type="code" @toggled="toggleFilter('code')"></checkbox>
-            <checkbox type="file" @toggled="toggleFilter('file')"></checkbox>
-            <checkbox type="link" @toggled="toggleFilter('link')"></checkbox>
+            <checkbox-input type="code" title="CODE" name="filter" @update="toggleFilter('code')" :value="1"></checkbox-input>
+            <checkbox-input type="file" title="FILE" name="filter" @update="toggleFilter('file')" :value="1"></checkbox-input>
+            <checkbox-input type="link" title="LINK" name="filter" @update="toggleFilter('link')" :value="1"></checkbox-input>
         </div>
         <div class="page__mt-1">
             <resources-layout type="list" :items="resources"></resources-layout>
@@ -22,13 +22,14 @@
 import { mapGetters } from 'vuex'
 import { getResourcesWithString, getResourcesByTypes  } from '../helpers/search'
 import Search from '../components/Search.vue'
-
+import CheckboxInput from '../components/inputs/CheckboxInput.vue'
 import ResourcesLayout from '../components/ResourcesLayout.vue'
 
 export default {
     components: {
         Search,
-        ResourcesLayout
+        ResourcesLayout,
+        CheckboxInput
     },
     data(){
         return {

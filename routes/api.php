@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\VisitorController;
+use App\Http\Controllers\EditorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,7 +16,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/links', [VisitorController::class, 'getLinks']);
+Route::get('/codes', [VisitorController::class, 'getCodes']);
+Route::get('/files', [VisitorController::class, 'getFiles']);
 
-Route::get('/hey', function (){
-    return "hello guys";
-});
+Route::post('/links', [EditorController::class, 'createLink'])->middleware('bool');
+Route::patch('/links/{id}', [EditorController::class, 'editLink'])->middleware('bool');
+Route::delete('/links/{id}', [EditorController::class, 'deleteLink']);
+
+Route::post('/codes', [EditorController::class, 'createCode']);
+Route::patch('/codes/{id}', [EditorController::class, 'editCode']);
+Route::delete('/codes/{id}', [EditorController::class, 'deleteCode']);
+
+Route::post('/files', [EditorController::class, 'createFile']);
+Route::patch('/files/{id}', [EditorController::class, 'editFile']);
+Route::delete('/files/{id}', [EditorController::class, 'deleteFile']);

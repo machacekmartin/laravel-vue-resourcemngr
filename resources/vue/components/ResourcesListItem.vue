@@ -30,7 +30,7 @@
         </transition>
         <transition name="fade" v-if="data.type == 'file'">
             <template v-if="showPreview">
-                <file-preview class="resources-list-item__addition resources-list-item__preview" :file="data.file"></file-preview>
+                <file-preview class="resources-list-item__addition resources-list-item__preview" :file="'../storage/' + data.file"></file-preview>
             </template>
         </transition>
     </div>
@@ -38,6 +38,7 @@
 <script>
 import CodeSnippet from './CodeSnippet.vue'
 import FilePreview from './FilePreview.vue'
+import axios from 'axios'
 
 export default {
     name: 'ResourcesListItem',
@@ -60,13 +61,12 @@ export default {
     },
     methods: {
         async downloadFile(path){
-            const name = path.split('/').pop()
-            const response = await this.$http.get(path)
+            const response = await axios.get('../storage/' + path)
             const url = window.URL.createObjectURL(new Blob([response.data]))
             let link = document.createElement('a')
 
             link.href = url;
-            link.setAttribute('download', name);
+            link.setAttribute('download', path);
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);

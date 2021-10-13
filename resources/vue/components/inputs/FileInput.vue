@@ -7,7 +7,7 @@
                 <input ref="fileinput" class="input-file__field" accept="image/jpeg,image/gif,image/png,application/pdf,image/x-eps" type="file" :name="name" :id="name" @change="updatePreview" />
                 
                 <template v-if="preview || value">
-                    <file-preview class="input-file__preview" :file="preview ? getSymPath() : value"></file-preview>
+                    <file-preview class="input-file__preview" :file="preview ? getSymPath() : '../storage/' + value"></file-preview>
                     <div class="input-file__controls">
                         <icon-button class="input-file__control" icon="edit" :iconSize="15" @click.native.prevent="invokeInput"></icon-button>
                         <icon-button class="input-file__control" icon="cross" :iconSize="15" @click.native.prevent="removePreview()" v-if="value && preview"></icon-button>
