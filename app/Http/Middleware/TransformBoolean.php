@@ -16,7 +16,7 @@ class TransformBoolean
      */
     public function handle(Request $request, Closure $next)
     {
-        $value = (
+        $value = (int)(
             $request->input('newtab') === '1' ||
             $request->input('newtab') === 'true'
         );

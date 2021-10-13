@@ -1,6 +1,9 @@
 <template>
     <div class="input input-snippet">
-        <p class="input__title">{{ title }}</p>    
+        <div class="input__header">
+            <p class="input__title">{{ title }}</p> 
+            <small class="input__error" v-if="error">{{ error }}</small>   
+        </div>    
         <template v-if="value">
             <div v-if="editing || !value" class="input-snippet__wrapper">
                 <textarea ref="snippet" type="text" class="input-snippet__field" v-model="localValue" @keydown.tab.prevent="tab"></textarea>

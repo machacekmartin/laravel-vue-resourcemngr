@@ -34,7 +34,7 @@ export default {
     data(){
         return {
             searchString: '',
-            activeFilters: [],
+            activeFilters: ['code', 'file', 'link'],
         }
     },
     computed: {
@@ -42,11 +42,9 @@ export default {
         ...mapGetters('files', ['getFiles']),
         ...mapGetters('codes', ['getCodes']),
 
-        combinedResources(){
-            return [...this.getLinks, ...this.getCodes, ...this.getFiles]
-        },
         resources(){
-            const filteredResources = getResourcesByTypes(this.combinedResources, this.activeFilters);
+            const sortedResources = [...this.getLinks, ...this.getCodes, ...this.getFiles].sort((f, s) => s.created_at - f.created_at)
+            const filteredResources = getResourcesByTypes(sortedResources, this.activeFilters);
             return getResourcesWithString(filteredResources, this.searchString)
         }
     },
@@ -64,8 +62,5 @@ export default {
             }
         },
     },
-    mounted(){
-        this.activeFilters = [... new Set(this.combinedResources.map(res => res.type))]
-    }
 }
 </script>

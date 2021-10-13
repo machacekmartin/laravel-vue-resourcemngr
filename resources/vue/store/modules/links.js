@@ -22,11 +22,12 @@ const actions = {
         commit('setLinks', links)        
     },
     async CreateLink({ state, commit }, formData){
-        let link = (await axios({
+        const response = await axios({
             method: 'POST',
             url: 'api/links',
             data: formData
-        })).data
+        })
+        let link = response.data
         link.type = 'link'
         
         commit('addLink', link)

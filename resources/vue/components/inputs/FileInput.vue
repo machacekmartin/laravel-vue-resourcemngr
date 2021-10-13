@@ -1,22 +1,23 @@
 <template>
     <div class="input input-file">
-        <p class="input__title">
-            <span>{{ title }}</span>
-        </p>
-            <label :for="name" class="input-file__wrapper">
-                <input ref="fileinput" class="input-file__field" accept="image/jpeg,image/gif,image/png,application/pdf,image/x-eps" type="file" :name="name" :id="name" @change="updatePreview" />
+        <div class="input__header">
+            <p class="input__title">{{ title }}</p> 
+            <small class="input__error" v-if="error">{{ error }}</small>   
+        </div>
+        <label :for="name" class="input-file__wrapper">
+            <input ref="fileinput" class="input-file__field" accept="image/jpeg,image/gif,image/png,application/pdf,image/x-eps" type="file" :name="name" :id="name" @change="updatePreview" />
                 
-                <template v-if="preview || value">
-                    <file-preview class="input-file__preview" :file="preview ? getSymPath() : '../storage/' + value"></file-preview>
-                    <div class="input-file__controls">
-                        <icon-button class="input-file__control" icon="edit" :iconSize="15" @click.native.prevent="invokeInput"></icon-button>
-                        <icon-button class="input-file__control" icon="cross" :iconSize="15" @click.native.prevent="removePreview()" v-if="value && preview"></icon-button>
-                    </div>
-                </template>
-                <template v-else>
-                    <icon :width="40" :height="40" class="input-file__icon" icon="plus"></icon>
-                </template>
-            </label>
+            <template v-if="preview || value">
+                <file-preview class="input-file__preview" :file="preview ? getSymPath() : '../storage/' + value"></file-preview>
+                <div class="input-file__controls">
+                    <icon-button class="input-file__control" icon="edit" :iconSize="15" @click.native.prevent="invokeInput"></icon-button>
+                    <icon-button class="input-file__control" icon="cross" :iconSize="15" @click.native.prevent="removePreview()" v-if="value && preview"></icon-button>
+                </div>
+            </template>
+            <template v-else>
+                <icon :width="40" :height="40" class="input-file__icon" icon="plus"></icon>
+            </template>
+        </label>
     </div>
 </template>
 

@@ -96,7 +96,7 @@ class EditorController extends Controller
     private function validateCode(Request $request, $editing){
         $data = $request->validate([
             'title'         =>  $editing ? 'max:100' : 'required|max:100',
-            'description'   =>  $editing ? 'max:400': 'max:400',
+            'description'   =>  $editing ? 'max:400': 'required|max:400',
             'snippet'       =>  $editing ? ''       : 'required'
         ]);
         return $data;

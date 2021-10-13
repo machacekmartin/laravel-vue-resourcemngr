@@ -10,4 +10,9 @@ class File extends Model
     use HasFactory;
 
     protected $fillable = ['title', 'file'];
+
+    protected $casts = [
+        'created_at' => 'timestamp',
+        'updated_at' => 'timestamp',
+    ];
 }

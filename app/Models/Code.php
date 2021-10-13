@@ -10,4 +10,9 @@ class Code extends Model
     use HasFactory;
 
     protected $fillable = ['title', 'description', 'snippet'];
+
+    protected $casts = [
+        'created_at' => 'timestamp',
+        'updated_at' => 'timestamp',
+    ];
 }

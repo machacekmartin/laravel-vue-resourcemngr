@@ -2,11 +2,14 @@
     <div class="modal">
         <div class="modal__content">
             <div class="modal__header">
-                <h2 class="modal__title">{{ getTitleByModalType }}</h2>
-                <icon-button class="modal__button" colorMode="dark" icon="cross" :iconSize="14" @click="cancel()"></icon-button>
+                <h2 class="modal__title">{{ getModalTitle }}</h2>
+                <icon-button class="modal__button" colorMode="dark" icon="cross" :iconSize="14" @click="DeactivateModal()"></icon-button>
             </div>
             <form class="modal__window">
-                <loading v-if="getIsLoading"></loading>
+                <transition-group name="fade">
+                    <loading key="loading" v-if="getIsLoading"></loading>
+                    <checkmark key="checkmark" v-if="showCheckmark"></checkmark>
+                </transition-group>
                 <component v-for="(input, index) in getModalInputs" :is="input.component + '-input'" :name="input.name" :title="input.description" :key="index" @update="UpdateFormData" :value="getCurrentData(input)" :error="getCurrentError(input)"></component>
             </form>
             <div class="modal__footer">
@@ -24,7 +27,8 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import Loading from '../components/Loading.vue'
+
+import Checkmark from '../components/Checkmark.vue'
 import TextInput from '../components/inputs/TextInput.vue'
 import SnippetInput from '../components/inputs/SnippetInput.vue'
 import TextareaInput from '../components/inputs/TextareaInput.vue'
@@ -34,7 +38,7 @@ import FileInput from '../components/inputs/FileInput.vue'
 export default {
     name: 'Modal',
     components: {
-        Loading,
+        Checkmark,
         TextInput,
         SnippetInput,
         TextareaInput,
@@ -44,13 +48,14 @@ export default {
     data() {
         return {
             formData: new FormData(),
-            errors: null 
+            errors: [],
+            showCheckmark: false
         };
     },
     computed: {
         ...mapGetters('modal', ['getModalType', 'getModalInputs', 'getModalInputData', 'getModalFormData', 'getModalPurpose']),
         ...mapGetters('loading', ['getIsLoading']),
-        getTitleByModalType(){
+        getModalTitle(){
             return this.getModalType.toUpperCase() + ' ' +  this.getModalPurpose.toUpperCase()
         }
     },
@@ -64,64 +69,35 @@ export default {
             return this.getModalInputData ? this.getModalInputData[input.name] : null
         },
         getCurrentError(input){
-            return this.errors ? this.errors[input.name] : null
+            const errors = this.errors[input.name]
+            return errors ? errors[0] : null
         },
-        cancel(){
-            this.DeactivateModal()
-        },
-        async remove(){
+        
+        invokeModalApiAction(prefix, purpose, payload){
             this.SetLoading(true)
-            
-            let response
-            switch(this.getModalPurpose){
-                case 'link':
-                    response = await this.DeleteLink(this.getModalInputData)
-                    break
-                case 'file':
-                    response = await this.DeleteFile(this.getModalInputData)
-                    break
-                case 'code':
-                    response = await this.DeleteCode(this.getModalInputData)
-                    break
-            }
-            this.SetLoading(false)
-            this.DeactivateModal()
+            // invoke Vuex Action f.e. this.EditLink(payload) or this.CreateFile(payload)
+            this[prefix + purpose.charAt(0).toUpperCase() + purpose.slice(1)](payload).then(response => {
+                this.errors = []
+                this.showCheckmark = true
+                this.SetLoading(false)
+                setTimeout(() => {
+                    this.showCheckmark = false
+                    this.DeactivateModal()
+                }, 1200)
+            }).catch(error => {
+                this.errors = error.response.data.errors
+                this.SetLoading(false)
+            })
+        },
+
+        async remove(){
+            this.invokeModalApiAction("Delete", this.getModalPurpose, this.getModalInputData)
         },
         async edit(){
-            this.SetLoading(true)
-            //loading = true
-            let response
-            switch(this.getModalPurpose){
-                case 'link':
-                    response = await this.EditLink({formData: this.getModalFormData, id: this.getModalInputData.id})
-                    break
-                case 'file':
-                    response = await this.EditFile({formData: this.getModalFormData, id: this.getModalInputData.id})
-                    break
-                case 'code':
-                    response = await this.EditCode({formData: this.getModalFormData, id: this.getModalInputData.id})
-                    break
-            }          
-            this.SetLoading(false)
-            this.DeactivateModal()
+            this.invokeModalApiAction("Edit", this.getModalPurpose, {formData: this.getModalFormData, id: this.getModalInputData.id})
         },
         async create(){
-            this.SetLoading(true)
-            //loading = true
-            let response
-            switch(this.getModalPurpose){
-                case 'link':
-                    response = await this.CreateLink(this.getModalFormData)
-                    break
-                case 'file':
-                    response = await this.CreateFile(this.getModalFormData)
-                    break
-                case 'code':
-                    response = await this.CreateCode(this.getModalFormData)
-                    break
-            }
-            this.SetLoading(false)
-            this.DeactivateModal()
+            this.invokeModalApiAction("Create", this.getModalPurpose, this.getModalFormData)
         }
     },
 };

@@ -26,13 +26,6 @@ const actions = {
         if (input.value === '' || input.value === null){
             commit('removeFormData', input)
         }
-        console.log("=============")
-        for (let key of state.formData.keys()){
-            console.log("key |", key)
-        }
-        for (let value of state.formData.values()){
-            console.log("value | ", value)
-        }
     },
     ActivateModal({ commit }, modal){
         commit('setType', modal.type)

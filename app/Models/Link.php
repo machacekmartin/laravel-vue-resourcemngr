@@ -10,5 +10,10 @@ class Link extends Model
     use HasFactory;
 
     protected $fillable = ['title', 'path', 'newtab'];
+    
+    protected $casts = [
+        'created_at' => 'timestamp',
+        'updated_at' => 'timestamp',
+    ];
 
 }

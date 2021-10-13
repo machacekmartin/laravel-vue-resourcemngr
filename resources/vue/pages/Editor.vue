@@ -44,8 +44,8 @@ export default {
         ...mapGetters('codes', ['getCodes']),
 
         resources(){
-            const combinedResources = [...this.getLinks, ...this.getCodes, ...this.getFiles]
-            return getResourcesWithString(combinedResources, this.searchString)
+            const sortedResources = [...this.getLinks, ...this.getCodes, ...this.getFiles].sort((f, s) => s.created_at - f.created_at)
+            return getResourcesWithString(sortedResources, this.searchString)
         }
     },
     methods: {

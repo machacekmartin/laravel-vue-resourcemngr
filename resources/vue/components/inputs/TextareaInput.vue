@@ -1,6 +1,9 @@
 <template>
     <div class="input input-textarea">
-        <p class="input__title">{{ title }}</p>    
+        <div class="input__header">
+            <p class="input__title">{{ title }}</p> 
+            <small class="input__error" v-if="error">{{ error }}</small>   
+        </div>    
         <template v-if="value">
             <div v-if="editing || !value" class="input-textarea__wrapper">
                 <textarea ref="textarea" type="text" class="input-textarea__field" v-model="localValue"></textarea>
