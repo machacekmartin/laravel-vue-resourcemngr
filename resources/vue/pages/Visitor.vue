@@ -1,12 +1,11 @@
 <template>
     <div class="page">  
         <div class="page__header">
-            <h1>Resources</h1>
+            <h1>Page for visitors</h1>
         </div>
         <div class="page__mt-2">
             <search @keypress="setSearch"></search>
         </div>
-        
         <div class="page__mt-2">
             <checkbox-input type="code" title="CODE" name="filter" @update="toggleFilter('code')" :value="1"></checkbox-input>
             <checkbox-input type="file" title="FILE" name="filter" @update="toggleFilter('file')" :value="1"></checkbox-input>

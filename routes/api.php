@@ -20,8 +20,8 @@ Route::get('/links', [VisitorController::class, 'getLinks']);
 Route::get('/codes', [VisitorController::class, 'getCodes']);
 Route::get('/files', [VisitorController::class, 'getFiles']);
 
-Route::post('/links', [EditorController::class, 'createLink'])->middleware('bool');
-Route::patch('/links/{id}', [EditorController::class, 'editLink'])->middleware('bool');
+Route::post('/links', [EditorController::class, 'createLink']);
+Route::patch('/links/{id}', [EditorController::class, 'editLink']);
 Route::delete('/links/{id}', [EditorController::class, 'deleteLink']);
 
 Route::post('/codes', [EditorController::class, 'createCode']);

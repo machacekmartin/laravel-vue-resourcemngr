@@ -7,13 +7,13 @@
 @import 'variables/mixins';
 @import 'variables/colors';
 
+@import 'components/navbar';
 @import 'components/page';
 @import 'components/icon-button';
 @import 'components/icon';
 @import 'components/sticker';
-@import 'components/resources-grid';
+@import 'components/resources-layout';
 @import 'components/resources-grid-item';
-@import 'components/resources-list';
 @import 'components/resources-list-item';
 @import 'components/search';
 @import 'components/checkbox';

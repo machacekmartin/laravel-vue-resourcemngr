@@ -50,9 +50,7 @@ class EditorController extends Controller
     public function createFile(Request $request){
         $data = $this->validateFile($request, false);
         $data['file'] = time() . '-' . $request->file->getClientOriginalName();
-        
         Storage::disk('public')->putFileAs('', $request->file, $data['file']);
-        
         return File::create($data);
     }
 
@@ -63,10 +61,11 @@ class EditorController extends Controller
 
         if ($request->file){
             $data['file'] = time() . '-' . $request->file->getClientOriginalName();
-            
-            if(Storage::disk('public')->exists($file->file)){
+
+            if (Storage::disk('public')->exists($file->file)){
                 Storage::disk('public')->delete($file->file);
             }
+
             Storage::disk('public')->putFileAs('', $request->file, $data['file']);
         }
         
@@ -84,29 +83,40 @@ class EditorController extends Controller
         return File::destroy($id);
     }
 
-
-
+    //Validators
     private function validateFile(Request $request, $editing){
         $data = $request->validate([
-            'title'  =>  $editing ? 'max:100' : 'required|max:100',
-            'file'   =>  $editing ? 'mimes:pdf|max:10000': 'required|mimes:pdf|max:10000',
+            'title' =>  $editing ? 'max:100' : 'required|max:100',
+            'file' =>  $editing ? 'mimes:pdf|max:10000' : 'required|mimes:pdf|max:10000',
         ]);
+
         return $data;
     }
     private function validateCode(Request $request, $editing){
         $data = $request->validate([
-            'title'         =>  $editing ? 'max:100' : 'required|max:100',
-            'description'   =>  $editing ? 'max:400': 'required|max:400',
-            'snippet'       =>  $editing ? ''       : 'required'
+            'title' =>  $editing ? 'max:100' : 'required|max:100',
+            'description' =>  $editing ? 'max:400' : 'required|max:400',
+            'snippet' =>  $editing ? '' : 'required'
         ]);
+
         return $data;
     }
 
     private function validateLink(Request $request, $editing){
+        if ($request->has('newtab')){
+            $value = (int)(
+                $request->input('newtab') === '1' ||
+                $request->input('newtab') === 'true' ||
+                $request->input('newtab') === true ||
+                $request->input('newtab') === 1
+            );
+            $request->merge(['newtab' => $value]);
+        }
+        
         $data = $request->validate([
-            'title'     =>  $editing ? 'max:100' : 'required|max:100',
-            'path'      =>  $editing ? 'max:100': 'required|max:100',
-            'newtab'    =>  $editing ? 'boolean': 'required|boolean'
+            'title' =>  $editing ? 'max:100' : 'required|max:100',
+            'path' =>  $editing ? 'max:100' : 'required|max:100',
+            'newtab' =>  $editing ? 'boolean' : 'required|boolean'
         ]);
         return $data;
     }

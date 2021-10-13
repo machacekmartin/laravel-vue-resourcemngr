@@ -9,9 +9,13 @@
         width: 100%;
         padding: 1rem;
         border-radius: .4rem;
-        background-color: darken($color-ultra_light_gray, 5%);
+        background-color: $color-ultra_light_gray;
         z-index: 2;
         border: solid 1px $color-light_gray;
+
+        &:hover{
+            background-color: darken($color-ultra_light_gray, 5%);
+        }
     }
 
     &__text{

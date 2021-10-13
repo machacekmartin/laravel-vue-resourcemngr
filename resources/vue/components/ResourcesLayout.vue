@@ -1,6 +1,13 @@
 <template>
-    <div :class="'resources-' + type">   
-        <component :is="'resources-' + type + '-item'" v-for="(item, index) in items" :key="index" :data="item"></component>
+    <div :class="'resources-layout resources-layout--' + type">   
+        <template v-if="items.length">
+            <component  :is="'resources-' + type + '-item'" v-for="(item, index) in items" :key="index" :data="item"></component>
+        </template>
+        <template v-else>
+            <div class="resources-layout__placeholder">
+                <span class="resources-layout__text" icon="search">Nothing here.. yet</span>
+            </div>
+        </template>
     </div>
 </template>
 <script>

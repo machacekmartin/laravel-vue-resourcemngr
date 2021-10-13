@@ -1,0 +1,31 @@
+.resources-layout{
+    position: relative;
+    
+    &--grid{
+
+        display: grid;
+
+        grid-template-columns: repeat(auto-fit, minmax(325px, 1fr));
+        grid-column-gap: .5rem;
+
+    }
+
+    &--list{
+        
+    }
+
+    &__placeholder{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10rem 0;
+        border-radius: .4rem;
+        border: solid 1px $color-light_gray;
+    }
+
+    &__text{
+        color: $color-light_gray;
+        font-weight: 500;
+        margin: 0 1rem;
+    }   
+}
