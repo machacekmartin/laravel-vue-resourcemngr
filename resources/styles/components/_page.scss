@@ -1,4 +1,6 @@
 .page{
+    padding-bottom: 5rem;
+    
     &__header{
         @media (min-width: 550px){
             display: flex;

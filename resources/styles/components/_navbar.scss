@@ -8,6 +8,7 @@
     background-color: $color-ultra_light_gray;
     border: solid 1px $color-light_gray;
     border-radius: .4rem .4rem 0 0;
+    z-index: 100;
 
     &__item{
         padding: 1rem 2rem;
