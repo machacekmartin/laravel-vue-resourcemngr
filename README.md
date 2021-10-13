@@ -75,7 +75,9 @@ After successfull setup, the app should look like this:
 Resources are empty, you need to add them. click on "Editor" on the bottom navigation and Create a new resource, f.e File (pdf).
 ![alt text](https://user-images.githubusercontent.com/33912290/137172603-bb2eefc6-c8c5-4862-b1cb-b4015ef0bd23.png)
 
- 
+After creating a couple of resources, the visitors's page should look like this:
+![alt text](https://user-images.githubusercontent.com/33912290/137178710-f9ac70fc-d390-4215-aba2-8fb3c7e6813f.png)
+
  
  
  
