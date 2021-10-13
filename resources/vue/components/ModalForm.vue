@@ -83,7 +83,7 @@ export default {
                 setTimeout(() => {
                     this.showCheckmark = false
                     this.DeactivateModal()
-                }, 1200)
+                }, 1000)
             }).catch(error => {
                 this.errors = error.response.data.errors
                 this.SetLoading(false)

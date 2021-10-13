@@ -112,6 +112,9 @@ class EditorController extends Controller
             );
             $request->merge(['newtab' => $value]);
         }
+        else{
+            $request->merge(['newtab' => 0]);
+        }
         
         $data = $request->validate([
             'title' =>  $editing ? 'max:100' : 'required|max:100',
