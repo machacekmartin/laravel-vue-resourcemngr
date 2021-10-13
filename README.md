@@ -65,8 +65,16 @@
  3. Go to your cloned/downloaded folder's root, run `cp .env.example .env`, `composer install` and `php artisan migrate` (Set the database connection in .env before migrating)
  4. Install Node.js (16.8) and NPM (7.2) and run `npm i`
  5. Build the app via `npm run dev` or `npm run prod`, open browser and add your server's address (my is `resourcemngr.test`)
- 
- 
+
+
+
+# Inside the app
+After successfull setup, the app should look like this:
+![alt text](https://user-images.githubusercontent.com/33912290/137171764-328225ab-980a-4d89-b0e7-381f72115344.png)
+
+Resources are empty, you need to add them. click on "Editor" on the bottom navigation and Create a new resource, f.e File (pdf).
+![alt text](https://user-images.githubusercontent.com/33912290/137172603-bb2eefc6-c8c5-4862-b1cb-b4015ef0bd23.png)
+
  
  
  
